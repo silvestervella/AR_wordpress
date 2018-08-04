@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "AR_wordpress"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
