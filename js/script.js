@@ -13,6 +13,7 @@
    * 1. Pages anim 
    */
 
+  
 jQuery(document).ready(function(){
 
   var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
@@ -178,7 +179,7 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
  */
   jQuery('.carousel-item').first().addClass('active');
   jQuery('#numbers').carousel({
-    interval: 10000
+    interval: 5000
   })
   
 

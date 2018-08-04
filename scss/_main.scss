@@ -3,6 +3,7 @@
 * 2. Header
 * 3. Slider sections
 * 4. Front Page Top
+* 4. Front Page Numbers sec
 */
 
 
@@ -66,8 +67,13 @@ html {
                     display: block;
                     a {
                         display: inline-block;
-                        margin-right: 20px;
                         position: relative;
+                        width: 90px;
+                        padding: 5px;
+                        margin-right: 5px;
+                        border: 1px solid #000;
+                        border-radius: 20px;
+                        opacity: 1;
                         span {
                             position: relative;
                             color: #000;
@@ -75,9 +81,12 @@ html {
                     }
                 }
                 .carousel-item {
+                    padding-top: 30px;
                     .posts-excerpt {
-                        width: 33.33%;
+                        width: 32.43%;
                         float: left;
+                        padding: 0 15px;
+                        margin: 0 5px;
                         .excerpt-text {
                             color: #000;
                         }
@@ -186,3 +195,36 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
         }        
     }
 }
+
+
+/* Front Page Numbers sec */
+#numbers-outer {
+    background: $primary-color;
+    color: #fff;
+    .carousel {
+        .carousel-item {
+            .posts-excerpt {
+                background: rgba(255,255,255,0.1);
+                border-radius: 10px;
+                .excerpt-meta {
+                    font-size: 80px;
+                    text-align: center;
+                }
+                .excerpt-title {
+                    font-size: 20px;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+                .excerpt-text {
+                    color: #fff;
+                }
+            }
+        }
+        .slider-controls {
+            a {
+                background: #fff;
+                border-color: #fff;
+            }
+        }
+    }
+    }

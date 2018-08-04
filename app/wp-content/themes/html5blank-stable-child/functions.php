@@ -13,7 +13,7 @@
  * 11. Post generator
  */
 
- 
+
 /**
  * 1. Register and enqueue script and styles
  *
@@ -282,12 +282,6 @@ function armanage_meta_save( $post_id ) {
     if( isset( $_POST[ 'number' ] ) ) {
         update_post_meta( $post_id, 'number', sanitize_text_field( $_POST[ 'number' ] ) );
     }
-    if( isset( $_POST[ 'bottom-text' ] ) ) {
-        update_post_meta( $post_id, 'bottom-text', sanitize_text_field( $_POST[ 'bottom-text' ] ) );
-    }
-    if( isset( $_POST[ 'link-text' ] ) ) {
-        update_post_meta( $post_id, 'link-text', sanitize_text_field( $_POST[ 'link-text' ] ) );
-    }
  
 }
 add_action( 'save_post', 'armanage_meta_save' );
@@ -362,9 +356,23 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
 
                 <div class="<?php echo $class; ?>">
                     <?php						
-                        //$meta_number = get_post_meta( $post->ID, 'number', true );
+                        $meta_number =  get_post_meta(get_the_id(), 'number', true);
                     ?>
                         <div class="posts-excerpt">
+
+                            <?php if (in_array("numbers", $args)) {
+                                if( !empty( $meta_number ) ) { ?>
+
+                            <div class="excerpt-meta">
+                                <?php echo $meta_number; ?>
+                            </div>
+
+                            <?php }; } ?>
+
+                            <div class="excerpt-title">
+                            <?php the_title(); ?>
+                            </div>
+                            
                             <div class="excerpt-text">
                             <?php the_content(); ?>
                             </div>
