@@ -26,24 +26,47 @@
 	</section>
 	<section id="numbers-outer" class="section-slider">
 		<div class="container">
-			<div id="numbers" class="carousel slide w-100" data-ride="carousel">
-				<div class="carousel-inner" role="listbox">
-					
-					<?php armanage_generate_posts('numbers' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , '' , 'carousel-item' ); ?>
-
-				</div>
+			<div id="numbers" class="carousel slide" data-ride="carousel">
 				<div class="slider-controls">
-						<a class="carousel-control-prev" href="#numbers" role="button" data-slide="prev">
-							<span class="" aria-hidden="true"></span>
-							<span class="">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#numbers" role="button" data-slide="next">
-							<span class="" aria-hidden="true"></span>
-							<span class="">Next</span>
-						</a>
+							<a class="carousel-control-prev" href="#numbers" role="button" data-slide="prev">
+								<span class="" aria-hidden="true"></span>
+								<span class=""><i class="fa fa-angle-left"></i></span>
+							</a>
+							<a class="carousel-control-next" href="#numbers" role="button" data-slide="next">
+								<span class="" aria-hidden="true"></span>
+								<span class=""><i class="fa fa-angle-right"></i></span>
+							</a>
+					</div>
+				<div class="carousel-inner" role="listbox">
+
+					<?php armanage_generate_posts('numbers' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , '' , 'item' ); ?>
+
 				</div>
 			</div>
 		</div>
+	</section>
+	<section id="products">    
+		<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , '' , 'product item' ); ?>
+		<section id="live-betting-grid">
+			<div class="container">
+				<div class="col-md-6 left">
+					<h3>Live Betting Grid</h3>
+				</div>
+				<div class="col-md-6 right">
+					<p>A simple and intuitive interface bring to your clients our Live Betting function! Available on both Desktop and Mobile devices.</p>
+				</div>
+			</div>
+		</section>
+		<section id="mobile-betting">
+			<div class="container">
+				<div class="col-md-6 left">
+					<h3>Mobile Betting</h3>
+				</div>
+				<div class="col-md-6 right">
+					<p>Always and everywhere. As the number of uses by mobile devices is growing exponentially, our betting websites are now a must-have for your portfolio of products.</p>
+				</div>
+			</div>
+		</section>
 	</section>
 
 <?php get_footer(); ?>

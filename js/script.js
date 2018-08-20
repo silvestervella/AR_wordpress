@@ -177,34 +177,46 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
 /**
  * 5. Carousel slider
  */
-  jQuery('.carousel-item').first().addClass('active');
-  jQuery('#numbers').carousel({
+  jQuery('#numbers ').carousel({
     interval: 5000
   })
-  
+  jQuery('#wl-specs ').carousel({
+    interval: 1700
+  })
 
-  jQuery('.carousel .carousel-item').each(function(){
-      var next = jQuery(this).next();
-      if (!next.length) {
+  jQuery('.carousel .item').each(function(){
+    var next = jQuery(this).next();
+    if (!next.length) {
       next = jQuery(this).siblings(':first');
-      }
-      next.children(':first-child').clone().appendTo(jQuery(this));
-      
-      if (next.next().length>0) {
+    }
+    next.children(':first-child').clone().appendTo(jQuery(this));
+    
+    if (next.next().length>0) {
       next.next().children(':first-child').clone().appendTo(jQuery(this));
-      }
-      else {
-        jQuery(this).siblings(':first').children(':first-child').clone().appendTo(jQuery(this));
-      }
+    }
+    else {
+      jQuery(this).siblings(':first').children(':first-child').clone().appendTo(jQuery(this));
+    }
   });
- 
 
+  jQuery('.section-slider').mouseover(function(e){
+    e.stopPropagation();
+    jQuery(this).find('.slider-controls').css({opacity: '1'});
+  });
+  jQuery('.section-slider').mouseout(function(e){
+    e.stopPropagation();
+    jQuery(this).find('.slider-controls').css({opacity: '0.3'});
+  })
+
+ 
 // End of document.ready
 });
 
 
 
 jQuery(window).load(function(){
+
+  jQuery('.item:first-child').addClass('active');
 
   /**
  * 1. Pages anim 

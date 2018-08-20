@@ -4,13 +4,14 @@
  * 2. Register our sidebars and widgetized areas.
  * 3. Set post featured image as background.
  * 4. Set post position order
- * 5. Add posts excerpt
+ * 5. Add posts features
  * 6. Allow html in post excerpt
  * 7. Add custom css to admin area
  * 8. Add custom metaboxes to posts
  * 9. Add custom post types
  * 10. Add custom logo
  * 11. Post generator
+ * 12. Products repeatable metaboxes
  */
 
 
@@ -93,7 +94,7 @@ function armanage_custom_post_sort( $post ){
         'custom_post_sort_box', 
         'Position in List of Pages', 
         'armanage_custom_post_order', 
-        'page' ,
+        'products' ,
         'side'
         );
         add_meta_box( 
@@ -149,9 +150,14 @@ function armanage_custom_post_order_value( $column, $post_id ){
 
 
   /**
-   * 5. Add posts excerpt
+   * 5. Add posts features
    */
-  add_post_type_support( 'page', 'excerpt' );
+  add_theme_support( 'post-thumbnails', array( 'post', 'page'  ) );
+
+  add_post_type_support( 'products' ,  array( 'excerpt', 'thumbnail' ) );
+  add_post_type_support( 'blog' ,  array( 'excerpt', 'thumbnail' ) );
+  add_post_type_support( 'page' ,  'excerpt');
+  
 
 
   /**
@@ -289,8 +295,6 @@ add_action( 'save_post', 'armanage_meta_save' );
 /**
  * 9. Add custom post types
  */
-add_theme_support('post-thumbnails');
-add_post_type_support( 'blog', 'thumbnail' );    
 function armanage_post_types() {
     register_post_type( 'blog',
       array(
@@ -312,6 +316,16 @@ function armanage_post_types() {
       'has_archive' => true,
     )
   );
+  register_post_type( 'products',
+  array(
+    'labels' => array(
+      'name' => __( 'Products' ),
+      'singular_name' => __( 'Products' )
+    ),
+    'public' => true,
+    'has_archive' => true,
+  )
+);
   }
   add_action( 'init', 'armanage_post_types' );
 
@@ -352,34 +366,202 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
          if ( $query1->have_posts() ) :
              while ($query1->have_posts() ) :
              $query1->the_post(); 
+
+             global $post;
              ?>
-
-                <div class="<?php echo $class; ?>">
-                    <?php						
-                        $meta_number =  get_post_meta(get_the_id(), 'number', true);
-                    ?>
-                        <div class="posts-excerpt">
-
-                            <?php if (in_array("numbers", $args)) {
-                                if( !empty( $meta_number ) ) { ?>
-
-                            <div class="excerpt-meta">
-                                <?php echo $meta_number; ?>
-                            </div>
-
-                            <?php }; } ?>
-
-                            <div class="excerpt-title">
-                            <?php the_title(); ?>
-                            </div>
+                    <?php	
+                        // Numbers section	
+                            if (in_array("numbers", $args)) {				
+                                $meta_number =  get_post_meta(get_the_id(), 'number', true);
+                            ?>
                             
-                            <div class="excerpt-text">
-                            <?php the_content(); ?>
+                        <div class="<?php echo $class; ?>">
+                            <div class="posts-excerpt">
+                                <?php 
+                                    if( !empty( $meta_number ) ) { ?>
+                                <div class="excerpt-meta">
+                                    <?php echo $meta_number; ?>
+                                </div>
+
+                                <?php }; ?>
+
+                                <div class="excerpt-title">
+                                <?php the_title(); ?>
+                                </div>
+                                
+                                <div class="excerpt-text">
+                                <?php the_content(); ?>
+                                </div>
                             </div>
                         </div>
-                </div>
+                        <?php }; ?>
+                    
+                    <?php
+
+
+                    // Products Section
+                    if (in_array("products", $args)) {				
+                    ?>
+                            <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> section">
+                                <div class="container">
+                                    <h1><?php the_title(); ?></h1>
+                                    <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail( $size, $attr ); ?></div>
+                                    <div class="col-md-5 col-sm-12 excerpt">
+                                        <?php the_excerpt(); ?>
+                                    </div>
+                                    <?php  if($post->post_name == "white-label-betting-software") {  ?>
+                                        
+                                            <div id="wl-specs" class="carousel slide col-md-12" data-ride="carousel">
+                                                 <?php $repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);  if ( $repeatable_fields ) : ?>
+                                                    <ul class="carousel-inner" role="listbox">
+                                                        <?php foreach ( $repeatable_fields as $field ) { ?>
+                                                        <li class="<?php echo $class; ?>">
+                                                        <div>
+                                                            <?php if($field['name'] != '') echo '<span class="name">'. esc_attr( $field['name'] ) . '</span>'; ?>
+                                                        </div>
+                                                        </li>
+                                                        <?php } ?> 
+                                                    </ul>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php  } ?>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    ?>
             <?php
         endwhile; // End looping through custom sorted posts
         endif; // End loop 1
-    }
+    }  
+
+
+/**
+ * 12. Products repeatable metaboxes
+*/
+add_action('admin_init', 'add_meta_boxes', 1);
+function add_meta_boxes() {
+	add_meta_box( 'repeatable-fields', 'Product specs', 'repeatable_meta_box_display', 'products', 'normal', 'high');
+}
+function repeatable_meta_box_display() {
+	global $post;
+	$repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
+	wp_nonce_field( 'repeatable_meta_box_nonce', 'repeatable_meta_box_nonce' );
+?>
+	<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$('.metabox_submit').click(function(e) {
+		e.preventDefault();
+		$('#publish').click();
+	});
+	$('#add-row').on('click', function() {
+		var row = $('.empty-row.screen-reader-text').clone(true);
+		row.removeClass('empty-row screen-reader-text');
+		row.insertBefore('#repeatable-fieldset-one tbody>tr:last');
+		return false;
+	});
+	$('.remove-row').on('click', function() {
+		$(this).parents('tr').remove();
+		return false;
+	});
+	$('#repeatable-fieldset-one tbody').sortable({
+		opacity: 0.6,
+		revert: true,
+		cursor: 'move',
+		handle: '.sort'
+	});
+});
+    </script>
+
+    <?php 
+        $custom = get_post_custom($post->ID);
+        $field_id = $custom["field_id"][0];
+    ?>
+
+	<table id="repeatable-fieldset-one" width="100%">
+	<thead>
+		<tr>
+			<th width="2%"></th>
+			<th width="30%">Name</th>
+			<th width="60%">Description</th>
+			<th width="2%"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php
+    if ( $repeatable_fields ) :
+        
+		foreach ( $repeatable_fields as $field ) {
+?>
+	<tr>
+		<td><a class="button remove-row" href="#">-</a></td>
+		<td><input type="text" class="widefat" name="name[]" value="<?php if($field['name'] != '') echo esc_attr( $field['name'] ); ?>" /></td>
+
+		<td><input type="text" class="widefat" name="url[]" value="<?php if ($field['url'] != '') echo esc_attr( $field['url'] ); else echo 'Details..'; ?>" /></td>
+		<td><a class="sort">|||</a></td>
+		
+	</tr>
+	<?php
+		}
+	else :
+		// show a blank one
+?>
+	<tr>
+		<td><a class="button remove-row" href="#">-</a></td>
+		<td><input type="text" class="widefat" name="name[]" /></td>
+
+
+		<td><input type="text" class="widefat" name="url[]" value="http://" /></td>
+<td><a class="sort">|||</a></td>
+		
+	</tr>
+	<?php endif; ?>
+
+	<!-- empty hidden one for jQuery -->
+	<tr class="empty-row screen-reader-text">
+		<td><a class="button remove-row" href="#">-</a></td>
+		<td><input type="text" class="widefat" name="name[]" /></td>
+
+
+		<td><input type="text" class="widefat" name="url[]" value="http://" /></td>
+<td><a class="sort">|||</a></td>
+		
+	</tr>
+	</tbody>
+	</table>
+
+	<p><a id="add-row" class="button" href="#">Add another</a>
+	<input type="submit" class="metabox_submit" value="Save" />
+	</p>
+	
+	<?php
+}
+add_action('save_post', 'repeatable_meta_box_save');
+function repeatable_meta_box_save($post_id) {
+	if ( ! isset( $_POST['repeatable_meta_box_nonce'] ) ||
+		! wp_verify_nonce( $_POST['repeatable_meta_box_nonce'], 'repeatable_meta_box_nonce' ) )
+		return;
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+		return;
+	if (!current_user_can('edit_post', $post_id))
+		return;
+	$old = get_post_meta($post_id, 'repeatable_fields', true);
+	$new = array();
+	$names = $_POST['name'];
+    $urls = $_POST['url'];
+	$count = count( $names );
+	for ( $i = 0; $i < $count; $i++ ) {
+		if ( $names[$i] != '' ) :
+			$new[$i]['name'] = stripslashes( strip_tags( $names[$i] ) );
+		if ( $urls[$i] == 'Details..' )
+			$new[$i]['url'] = '';
+		else
+			$new[$i]['url'] = stripslashes( $urls[$i] ); // and however you want to sanitize
+		endif;
+	}
+	if ( !empty( $new ) && $new != $old )
+        update_post_meta( $post_id, 'repeatable_fields', $new );
+	elseif ( empty($new) && $old )
+		delete_post_meta( $post_id, 'repeatable_fields', $old );
+}
 ?>
