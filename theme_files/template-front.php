@@ -45,9 +45,13 @@
 			</div>
 		</div>
 	</section>
-	<section id="products">    
+	<section id="products">
+		<h2>Products</h2>    
 		<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , '' , 'product item' ); ?>
-		<section id="live-betting-grid">
+		<div class="sec-icon">
+			<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/package.png" alt="package icon" />
+		</div>
+		<section id="live-betting-grid" class="home-prods">
 			<div class="container">
 				<div class="col-md-6 left">
 					<h3>Live Betting Grid</h3>
@@ -57,13 +61,13 @@
 				</div>
 			</div>
 		</section>
-		<section id="mobile-betting">
+		<section id="mobile-betting" class="home-prods">
 			<div class="container">
 				<div class="col-md-6 left">
-					<h3>Mobile Betting</h3>
+					<p>Always and everywhere. As the number of uses by mobile devices is growing exponentially, our betting websites are now a must-have for your portfolio of products.</p>
 				</div>
 				<div class="col-md-6 right">
-					<p>Always and everywhere. As the number of uses by mobile devices is growing exponentially, our betting websites are now a must-have for your portfolio of products.</p>
+				<h3>Mobile Betting</h3>
 				</div>
 			</div>
 		</section>

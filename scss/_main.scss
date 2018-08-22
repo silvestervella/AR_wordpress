@@ -3,20 +3,22 @@
 * 2. Header
 * 3. Slider sections
 * 4. Front Page Top
-* 4. Front Page Numbers sec
-* 5. Front page white label sec
+* 5. Front Page Numbers sec
+* 6. Front page white label sec
+* 7. Front page live betting sec
+* 8. Front page mobile betitng sec
 */
 
 
 
-/* General */
+/* 1. General */
 html {
     font-size: 16px;
 }
 
 
 
-/* Header */
+/* 2. Header */
 #header {
     position: absolute;
     width: 100%;
@@ -60,7 +62,7 @@ html {
 
 
 
-/* Sections */
+/* 3. Slider sections */
 .section-slider , .section {
     padding: 30px 0;
         .container {
@@ -127,7 +129,7 @@ html {
 
 
 
-/* Front Page Top */
+/* 4. Front Page Top */
 #top {
     height: 100vh;
     width: 100%;
@@ -224,7 +226,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 }
 
 
-/* Front Page Numbers sec */
+/* 5. Front Page Numbers sec */
 #numbers-outer {
     background: $primary-color;
     color: #fff;
@@ -260,66 +262,123 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
     }
 
 
-
-    /* Front page white label sec */
-    #white-label-betting-software {
-        background: #fff;
-        span {
-            display: block;
-        }
-        .excerpt {
+    #products {
+        h2 {
+            padding: 50px 0;
             text-align: center;
-            div {
-                background: rgba(0,0,0,0.1);
-                border-radius: 10px;
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-                padding-top: 10px;
-                ul {
-                    padding: 0;
-                    margin: 0;
-                    list-style: none;
-                    li {
-                        padding-bottom: 10px;
-                        font-size: 20px; 
+        }
+        .sec-icon {
+            padding: 80px 0;
+            text-align: center;
+            img {
+                width: 50px;
+            }
+        }
+        .home-prods {
+            background-size: 100%;
+            font-size: 18px;
+            height: 300px;
+            .container {
+                height: inherit;
+                div {
+                    height: inherit;
+                }
+            }
+            h3 {
+                color: #fff;
+                font-size: 40px;
+                top: 50%;
+                position: relative;
+                transform: translateY(-50%);
+                margin: 0;
+            }
+            p {
+                top: 50%;
+                position: relative;
+                transform: translateY(-50%);
+                &:after {
+                    content: '';
+                    width: 10%;
+                    display: block;
+                    padding-top: 20px;
+                    position: absolute;
+                }
+            }
+    }
+    /* 6. Front page white label sec */
+        #white-label-betting-software {
+            background: #fff;
+            span {
+                display: block;
+            }
+            .excerpt {
+                text-align: center;
+                div {
+                    background: rgba(0,0,0,0.1);
+                    border-radius: 10px;
+                    width: 100%;
+                    max-width: 300px;
+                    margin: 0 auto;
+                    padding-top: 10px;
+                    ul {
+                        padding: 0;
+                        margin: 0;
+                        list-style: none;
+                        li {
+                            padding-bottom: 10px;
+                            font-size: 20px; 
+                        }
                     }
                 }
             }
-        }
-        .carousel {
-            ul {
-                list-style: none;
-                padding: 0;
-                margin: 30px 0 0 0;
-                background: #000000;
-                border-radius: 10px;
-                .item {
+            .carousel {
+                ul {
+                    list-style: none;
                     padding: 0;
-                    margin: 0;
-                    div {
-                        width: 32.43%;
-                        float: left;
-                        padding: 0 15px;
-                        margin: 0 5px;
-                        span {
-                            padding: 20px 0;
-                            text-align: center;
-                            font-size: 20px;
-                            color: #fff;
+                    margin: 30px 0 0 0;
+                    background: #333;
+                    .item {
+                        padding: 0;
+                        margin: 0;
+                        div {
+                            width: 32.43%;
+                            float: left;
+                            padding: 0 15px;
+                            margin: 0 5px;
+                            span {
+                                padding: 5px 0;
+                                text-align: center;
+                                font-size: 20px;
+                                color: #fff;
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
-    #live-betting-grid {
-        background: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/live-grid-back-1.jpg) no-repeat center;
-        background-size: 100%;
-        padding: 30px 0;
-        h3 {
-            min-height: 100px;
-            line-height: 100px;
+        /* 7. Front page live betting sec */
+        #live-betting-grid {
+            background: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/live-grid-back.jpg) no-repeat center;
+            p {
+                color: #fff;
+                &:after {
+                    border-bottom: 2px solid #fff;
+                }
+            }
+        }
+        /* 8. Front page mobile betting sec */
+        #mobile-betting {
+            background: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/MOBILE-BETTING-BACK.jpg) no-repeat center;
+            p {
+                color: #000;
+                &:after {
+                    content: '';
+                    border-bottom: 2px solid #000;
+                }
+            }
+            h3 {
+                text-align: right;
+            }
         }
     }
