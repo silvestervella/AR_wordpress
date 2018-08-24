@@ -12,6 +12,7 @@
  * 10. Add custom logo
  * 11. Post generator
  * 12. Products repeatable metaboxes
+ * 13. Create taxonomy
  */
 
 
@@ -104,6 +105,13 @@ function armanage_custom_post_sort( $post ){
             'numbers' ,
             'side'
             );
+            add_meta_box( 
+                'custom_post_sort_box', 
+                'Position', 
+                'armanage_custom_post_order', 
+                'services' ,
+                'side'
+                );
   }
   add_action( 'add_meta_boxes', 'armanage_custom_post_sort' );
 
@@ -155,6 +163,7 @@ function armanage_custom_post_order_value( $column, $post_id ){
   add_theme_support( 'post-thumbnails', array( 'post', 'page'  ) );
 
   add_post_type_support( 'products' ,  array( 'excerpt', 'thumbnail' ) );
+  add_post_type_support( 'services' ,  array( 'excerpt', 'thumbnail' ) );
   add_post_type_support( 'blog' ,  array( 'excerpt', 'thumbnail' ) );
   add_post_type_support( 'page' ,  'excerpt');
   
@@ -324,8 +333,19 @@ function armanage_post_types() {
     ),
     'public' => true,
     'has_archive' => true,
-    'taxonomies'  => array( 'category' ),
+    'taxonomies'  => array( 'product_type' ),
   )
+);
+register_post_type( 'services',
+array(
+  'labels' => array(
+    'name' => __( 'Services' ),
+    'singular_name' => __( 'Services' )
+  ),
+  'public' => true,
+  'has_archive' => true,
+  'taxonomies'  => array( 'services_placement' ),
+)
 );
   }
   add_action( 'init', 'armanage_post_types' );
@@ -352,14 +372,16 @@ add_action( 'after_setup_theme', 'armanage_setup' );
 /**
  * 11. Post generator
 */
-function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key ,  $p_num_of_posts , $p_meta_box_val , $class  ) { 
+function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key ,  $p_num_of_posts , $p_meta_box_val , $prod_type , $serv_place , $class  ) { 
         $args = array(
             'post_type' => $p_type,
             'orderby'   => $p_order_by,
             'order' => $p_order,
             'meta_key' => $p_meta_key,
             'posts_per_page' => $p_num_of_posts,
-            'category_name' => $p_meta_box_val
+            'category_name' => $p_meta_box_val,
+            'product_type' => $prod_type,
+            'service_placement' => $serv_place
          );
          $query1 = new WP_query ( $args );
          if ( $query1->have_posts() ) :
@@ -399,9 +421,9 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
 
 
                     // Products Section (Our products)
-                    if (in_array("our-products" || "third-party-products" , $args)) {				
+                    if (in_array("our-products" , $args)) {					
                     ?>
-                            <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> section">
+                            <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> ">
                                 <div class="container">
                                     <h3><?php the_title(); ?></h3>
                                     <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail( $size, $attr ); ?></div>
@@ -429,35 +451,37 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                     <?php
                         }
 
+                    // Products Section (Our products)
+                    if (in_array("third-party-products" , $args)) {					
+                        ?>
+                                <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?>">
+                                        <div class="col-md-6">
+                                            <div class="tp-prod-outer">
+                                                <div class="tp-img-outer">
+                                                    <?php the_post_thumbnail( $size, $attr ); ?>
+                                                </div>
+                                                <h3><?php the_title(); ?></h3>
+                                                <div class="excerpt">
+                                                    <?php the_excerpt(); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                        <?php
+                            }
 
                     // Services
-                    if (in_array("services" , $args)) {				
+                    if (in_array("home-service-front-page-listed" , $args)) {				
                         ?>
-                                <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> section">
-                                    <div class="container">
-                                        <h2>Services</h2>
-                                        <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail( $size, $attr ); ?></div>
-                                        <div class="col-md-5 col-sm-12 excerpt">
-                                            <?php the_excerpt(); ?>
-                                        </div>
-                                        <?php  if($post->post_name == "white-label-betting-software") {  ?>
-                                            
-                                                <div id="wl-specs" class="carousel slide col-md-12" data-ride="carousel">
-                                                     <?php $repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);  if ( $repeatable_fields ) : ?>
-                                                        <ul class="carousel-inner" role="listbox">
-                                                            <?php foreach ( $repeatable_fields as $field ) { ?>
-                                                            <li class="<?php echo $class; ?>">
-                                                            <div>
-                                                                <?php if($field['name'] != '') echo '<span class="name">'. esc_attr( $field['name'] ) . '</span>'; ?>
-                                                            </div>
-                                                            </li>
-                                                            <?php } ?> 
-                                                        </ul>
+                                            <div class="col-md-4">
+                                                <div class="serv-outer">
+                                                    <div class="tp-img-outer">
+                                                        <?php the_post_thumbnail( $size, $attr ); ?>
+                                                    </div>
+                                                    <h3><?PHP the_title(); ?></h3>
+                                                    <div class="excerpt"><?PHP the_excerpt(); ?></div>
                                                 </div>
-                                            <?php endif; ?>
-                                        <?php  } ?>
-                                    </div>
-                                </div>
+                                            </div>
                         <?php
                             }
                         
@@ -595,4 +619,30 @@ function repeatable_meta_box_save($post_id) {
 	elseif ( empty($new) && $old )
 		delete_post_meta( $post_id, 'repeatable_fields', $old );
 }
+
+/**
+ * 13. Create taxonomy
+ */
+function atominktheme_custom_taxonomy() {
+    // create a new taxonomy
+    register_taxonomy(
+        'product_type',
+        'products',
+        array(
+            'label' => __( 'Type' ),
+            'rewrite' => array( 'slug' => 'product_type' ),
+            'hierarchical' => true,
+        )
+    );
+        register_taxonomy(
+        'service_placement',
+        'services',
+        array(
+            'label' => __( 'Placement' ),
+            'rewrite' => array( 'slug' => 'service_placement' ),
+            'hierarchical' => true,
+        )
+    );
+}
+add_action( 'init', 'atominktheme_custom_taxonomy' );
 ?>
