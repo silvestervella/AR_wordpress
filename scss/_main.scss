@@ -299,7 +299,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
                 transform: translateY(-50%);
                 margin: 0;
             }
-            p {
+            .excerpt {
                 top: 50%;
                 position: relative;
                 transform: translateY(-50%);
@@ -367,17 +367,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
         /* 7. Front page live betting sec */
         #live-betting-grid {
             background: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/live-grid-back.jpg) no-repeat center;
-            p {
+            .excerpt {
                 color: #fff;
                 &:after {
                     border-bottom: 2px solid #fff;
                 }
             }
+            h3 {
+                color: #fff;
+            }
         }
         /* 8. Front page mobile betting sec */
         #mobile-betting {
             background: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/MOBILE-BETTING-BACK.jpg) no-repeat center;
-            p {
+            .excerpt {
                 color: #000;
                 &:after {
                     content: '';
@@ -386,6 +389,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
             }
             h3 {
                 text-align: right;
+                color: #fff;
             }
         }
     }
@@ -396,11 +400,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 #third-parties {
     background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/third-p-back.png);
     background-size: cover;
-    h2{
+    .title{
         color: #fff;
     }
     .left , .right {
-        .tp-serv-outer {
+        .tp-prod-outer {
             background: rgba(255,255,255,0.1);
             border-radius: 30px;
             padding: 30px;
@@ -417,6 +421,34 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
             }
             .tp-img-outer {
                 text-align: center
+            }
+        }
+    }
+}
+#services {
+    background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/services-back.jpg);
+    background-size: cover;
+    .title{
+        color: #fff;
+    }
+    .serv-outer {
+        background: rgba(255,255,255,0.1);
+        border-radius: 30px;
+        padding: 30px;
+        margin: 30px auto;
+        position: relative;
+        h3 {
+            text-align: center;
+            padding: 10px 0 50px 0;
+            color: #fff
+        }
+        p {
+            color: #fff;  
+        }
+        .tp-img-outer {
+            text-align: center;
+            img {
+                width: 128px
             }
         }
     }

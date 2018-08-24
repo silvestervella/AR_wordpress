@@ -39,7 +39,7 @@
 					</div>
 				<div class="carousel-inner" role="listbox">
 
-					<?php armanage_generate_posts('numbers' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , '' , 'item' ); ?>
+					<?php armanage_generate_posts('numbers' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'item' ); ?>
 
 				</div>
 			</div>
@@ -47,10 +47,12 @@
 	</section>
 	<section id="products" class="row">
 		<h2 class="title">Products</h2>    
-		<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , '' , 'product item' ); ?>
+		<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , 'our-products' , 'product item' ); ?>
 		<div class="sec-icon">
 			<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/package-1.png" alt="package icon" />
 		</div>
+		<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , 'third-party-products' , 'product' ); ?>
+		<!--
 		<section id="live-betting-grid" class="home-prods row">
 			<div class="container">
 				<div class="col-md-6 left">
@@ -77,7 +79,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 left">
-					<div class="tp-serv-outer">
+					<div class="tp-prod-outer">
 						<div class="tp-img-outer">
 							<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/slot-machine.png" alt="slot machine image" />
 						</div>
@@ -86,7 +88,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 right">
-					<div class="tp-serv-outer">
+					<div class="tp-prod-outer">
 						<div class="tp-img-outer">
 							<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/casino-chip.png" alt="casino chip image" />
 						</div>
@@ -97,7 +99,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 left">
-					<div class="tp-serv-outer">
+					<div class="tp-prod-outer">
 						<div class="tp-img-outer">
 							<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/running-dog-silhouette.png" alt="racing dog image" />
 						</div>
@@ -106,13 +108,60 @@
 					</div>
 				</div>
 				<div class="col-md-6 right">
-					<div class="tp-serv-outer">
+					<div class="tp-prod-outer">
 						<div class="tp-img-outer">
 							<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/poker-playing-cards.png" alt="poker cards image" />
 						</div>
 						<h3>Poker</h3>
 						<p>Experience our realistic online poker. One can play in more than one poker room using a single account: Poker, DBG Poker, 2D DBG Poker and 3d DBG Poker 3D Live.</p>
 					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="services" class="row">
+		<h2 class="title">Services</h2>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="serv-outer">
+						<div class="tp-img-outer">
+							<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/fraud-icon.png" alt="slot machine image" />
+						</div>
+						<h3>FRAUD DEPARTMENT</h3>
+						<p>No one should gamble against rigged odds. Fraudsters ruin the experience for your customers. We help you to increase your profit and your customers satisfaction.</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="serv-outer">
+						<div class="tp-img-outer">
+							<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/risk-icon.png" alt="casino chip image" />
+						</div>
+						<h3>RISK MANAGEMENT</h3>
+						<p>With deep understanding of players and patterns of play, Risk Managers use their insight and extensive experience to set parameters on the various sports, whilst also adjusting like player limits, market limits and overseeing the bet acceptance.</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="serv-outer">
+						<div class="tp-img-outer">
+							<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/payment-icon.png" alt="racing dog image" />
+						</div>
+						<h3>PAYMENT SOLUTIONS</h3>
+						<p>AR Management only uses the most secure, safe and most reliable payment gateways with several options to choose from such as Skrill (formerly Moneybookers), Neteller and bank wire.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+-->
+	<section id="pay-gateways-outer" class="section-slider row">
+		<div class="container">
+			<div id="pay-gateways" class="carousel slide" data-ride="carousel">
+				<div class="slider-controls">
+
+					</div>
+				<div class="carousel-inner" role="listbox">
+
 				</div>
 			</div>
 		</div>

@@ -324,6 +324,7 @@ function armanage_post_types() {
     ),
     'public' => true,
     'has_archive' => true,
+    'taxonomies'  => array( 'category' ),
   )
 );
   }
@@ -351,16 +352,14 @@ add_action( 'after_setup_theme', 'armanage_setup' );
 /**
  * 11. Post generator
 */
-function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key ,  $p_num_of_posts , $p_meta_box , $p_meta_box_val , $class  ) { 
+function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key ,  $p_num_of_posts , $p_meta_box_val , $class  ) { 
         $args = array(
             'post_type' => $p_type,
             'orderby'   => $p_order_by,
             'order' => $p_order,
             'meta_key' => $p_meta_key,
             'posts_per_page' => $p_num_of_posts,
-    
-            // $p_meta_box is the taxonomy we registered (instead of categories) for cpt
-            $p_meta_box => $p_meta_box_val
+            'category_name' => $p_meta_box_val
          );
          $query1 = new WP_query ( $args );
          if ( $query1->have_posts() ) :
@@ -399,12 +398,12 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                     <?php
 
 
-                    // Products Section
-                    if (in_array("products", $args)) {				
+                    // Products Section (Our products)
+                    if (in_array("our-products" || "third-party-products" , $args)) {				
                     ?>
                             <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> section">
                                 <div class="container">
-                                    <h1><?php the_title(); ?></h1>
+                                    <h3><?php the_title(); ?></h3>
                                     <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail( $size, $attr ); ?></div>
                                     <div class="col-md-5 col-sm-12 excerpt">
                                         <?php the_excerpt(); ?>
@@ -429,8 +428,40 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                             </div>
                     <?php
                         }
-                    ?>
-            <?php
+
+
+                    // Services
+                    if (in_array("services" , $args)) {				
+                        ?>
+                                <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> section">
+                                    <div class="container">
+                                        <h2>Services</h2>
+                                        <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail( $size, $attr ); ?></div>
+                                        <div class="col-md-5 col-sm-12 excerpt">
+                                            <?php the_excerpt(); ?>
+                                        </div>
+                                        <?php  if($post->post_name == "white-label-betting-software") {  ?>
+                                            
+                                                <div id="wl-specs" class="carousel slide col-md-12" data-ride="carousel">
+                                                     <?php $repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);  if ( $repeatable_fields ) : ?>
+                                                        <ul class="carousel-inner" role="listbox">
+                                                            <?php foreach ( $repeatable_fields as $field ) { ?>
+                                                            <li class="<?php echo $class; ?>">
+                                                            <div>
+                                                                <?php if($field['name'] != '') echo '<span class="name">'. esc_attr( $field['name'] ) . '</span>'; ?>
+                                                            </div>
+                                                            </li>
+                                                            <?php } ?> 
+                                                        </ul>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php  } ?>
+                                    </div>
+                                </div>
+                        <?php
+                            }
+                        
+
         endwhile; // End looping through custom sorted posts
         endif; // End loop 1
     }  
