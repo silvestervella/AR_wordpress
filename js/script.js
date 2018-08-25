@@ -7,6 +7,7 @@
    * 3. Games info slider
    * 4. No scroll on open menu
    * 5. Carousel slider
+   * 6. Products section add class to .item
    * 
    * window.load
    * 
@@ -207,6 +208,29 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
     e.stopPropagation();
     jQuery(this).find('.slider-controls').css({opacity: '0.3'});
   })
+
+
+  /**
+   * 6. Products section add class to .item
+   */
+  jQuery("#products > .item:nth-child(odd)").find("div.featured-img").addClass("col-md-push-5").siblings(".excerpt").addClass("col-md-pull-7");
+
+
+  /**
+   * 7. Set equal height to divs
+   */
+
+var hiCol = 0;
+var h = 0;
+jQuery(".section").each(function(){
+  jQuery(this).find("div.adj-col").each(function(){
+    h = jQuery(this).height();
+    if(h > hiCol){
+      hiCol = h;
+    }    
+  });
+  jQuery(this).find("div.adj-col").css("height" , hiCol);  
+});
 
  
 // End of document.ready

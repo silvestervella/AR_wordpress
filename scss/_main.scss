@@ -135,6 +135,17 @@ h2.title {
                         .carousel-inner .item.left { 
                             transform: translateX(0);
                         }
+                        .title {
+                            margin: 0;
+                            color: #fff;
+                        }
+                        .sec-icon {
+                            padding: 80px 0;
+                            text-align: center;
+                            img {
+                                width: 600px;
+                            }
+                        }
 }
 
 
@@ -274,17 +285,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 
 
     #products {
-        .sec-icon {
-            padding: 80px 0;
-            text-align: center;
-            img {
-                width: 600px;
-            }
+        background: #fff url(http://localhost/ARsite/app/wp-content/uploads/2018/08/white-label-back.jpg) no-repeat center;
+        background-size: cover;
+        .title {
+            color: #333;
         }
-        .home-prods {
-            background-size: 100%;
-            font-size: 18px;
-            height: 300px;
+        .item {
+            .container {
+                position: relative;
+            }
+            padding: 50px 0;
+            .excerpt {
+                color: #000;
+                top: 50%;
+                transform: translateY(-50%);
+                position: absolute;
+                &:after {
+                    content: '';
+                    border-bottom: 2px solid #000;
+                }
+            }
+            h3 {
+                color: #333;
+            }
+            .featured-img {
+                img {
+                    width: 450px;
+                    margin: 0 auto;
+                }
+            }
+            &:nth-child(odd) {
+                .featured-img , h3 {
+                    text-align: right;
+                }
+            }
+            &:nth-child(even) {
+                .excerpt {
+                    right: 0;
+                }
+            }
+        }/*
             .container {
                 height: inherit;
                 div {
@@ -311,17 +351,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
                     position: absolute;
                 }
             }
-    }
+
     /* 6. Front page white label sec */
         #white-label-betting-software {
-            background: #fff;
             span {
                 display: block;
             }
             .excerpt {
                 text-align: center;
                 div {
-                    background: rgba(0,0,0,0.1);
+                    background: rgba(0,0,0,0.04);
                     border-radius: 10px;
                     width: 100%;
                     max-width: 300px;
@@ -365,33 +404,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
         }
 
         /* 7. Front page live betting sec */
-        #live-betting-grid {
-            background: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/live-grid-back.jpg) no-repeat center;
-            .excerpt {
-                color: #fff;
-                &:after {
-                    border-bottom: 2px solid #fff;
-                }
-            }
-            h3 {
-                color: #fff;
-            }
-        }
+        //#live-betting-grid {
+
+        //}
         /* 8. Front page mobile betting sec */
-        #mobile-betting {
-            background: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/MOBILE-BETTING-BACK.jpg) no-repeat center;
-            .excerpt {
-                color: #000;
-                &:after {
-                    content: '';
-                    border-bottom: 2px solid #000;
-                }
-            }
-            h3 {
-                text-align: right;
-                color: #fff;
-            }
-        }
+        //#mobile-betting {
+
+        //}
     }
 
 

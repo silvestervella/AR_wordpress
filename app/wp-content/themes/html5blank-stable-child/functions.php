@@ -430,9 +430,9 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                                     <div class="col-md-5 col-sm-12 excerpt">
                                         <?php the_excerpt(); ?>
                                     </div>
-                                    <?php  if($post->post_name == "white-label-betting-software") {  ?>
+                                    <?php /*  if($post->post_name == "white-label-betting-software") {  ?>
                                         
-                                            <div id="wl-specs" class="carousel slide col-md-12" data-ride="carousel">
+                                                <div id="wl-specs" class="carousel slide col-md-12" data-ride="carousel">
                                                  <?php $repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);  if ( $repeatable_fields ) : ?>
                                                     <ul class="carousel-inner" role="listbox">
                                                         <?php foreach ( $repeatable_fields as $field ) { ?>
@@ -441,11 +441,11 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                                                             <?php if($field['name'] != '') echo '<span class="name">'. esc_attr( $field['name'] ) . '</span>'; ?>
                                                         </div>
                                                         </li>
-                                                        <?php } ?> 
+                                                        <?php }  ?> 
                                                     </ul>
-                                            </div>
+                                                </div> 
                                         <?php endif; ?>
-                                    <?php  } ?>
+                                    <?php  } */ ?>
                                 </div>
                             </div>
                     <?php
@@ -456,7 +456,7 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                         ?>
                                 <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?>">
                                         <div class="col-md-6">
-                                            <div class="tp-prod-outer">
+                                            <div class="tp-prod-outer adj-col">
                                                 <div class="tp-img-outer">
                                                     <?php the_post_thumbnail( $size, $attr ); ?>
                                                 </div>
@@ -474,7 +474,7 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                     if (in_array("home-service-front-page-listed" , $args)) {				
                         ?>
                                             <div class="col-md-4">
-                                                <div class="serv-outer">
+                                                <div class="serv-outer  adj-col">
                                                     <div class="tp-img-outer">
                                                         <?php the_post_thumbnail( $size, $attr ); ?>
                                                     </div>

@@ -46,16 +46,17 @@
 		</div>
 	</section>
 	<section id="products" class="row section">
-		<h2 class="title">Products</h2>    
-		<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'our-products' , '' , ' item' ); ?>
-		<div class="sec-icon">
-			<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/package-1.png" alt="package icon" />
-		</div>
-	<section id="third-parties" class="row section">
-		<h2 class="title">Third Party Products</h2>
-		<div class="container">
-			<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'third-party-products' , '' , '' ); ?>
-		</div>
+			<h2 class="title">Products</h2>    
+			<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'our-products' , '' , 'item' ); ?>
+			<div class="sec-icon">
+				<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/package-1.png" alt="package icon" />
+			</div>
+	</section>
+	<section id="third-parties" class="section">
+			<h2 class="title">Third Party Products</h2>
+			<div class="container">
+				<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'third-party-products' , '' , '' ); ?>
+			</div>
 	</section>
 	<section id="services" class="row section">
 		<h2 class="title">Services</h2>
@@ -75,5 +76,6 @@
 			</div>
 		</div>
 	</section>
+
 
 <?php get_footer(); ?>
