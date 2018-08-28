@@ -1,5 +1,6 @@
 <?php
 /**
+ * 0. Theme variables
  * 1. Register and enqueue script and styles
  * 2. Register our sidebars and widgetized areas.
  * 3. Set post featured image as background.
@@ -15,6 +16,21 @@
  * 13. Create taxonomy
  */
 
+
+ /**
+  * 0. Theme variables
+  */
+
+  // Site prefix
+$site_prfx = 'armanage';
+
+
+// Front page sections Id incrementor
+function genId($arg1) {
+    static $idInc = 0;
+    $idInc++;
+    echo "$arg1-fp-sec-$idInc";
+}
 
 /**
  * 1. Register and enqueue script and styles
@@ -112,6 +128,13 @@ function armanage_custom_post_sort( $post ){
                 'services' ,
                 'side'
                 );
+                add_meta_box( 
+                    'custom_post_sort_box', 
+                    'Position', 
+                    'armanage_custom_post_order', 
+                    'payments' ,
+                    'side'
+                    );
   }
   add_action( 'add_meta_boxes', 'armanage_custom_post_sort' );
 
@@ -166,6 +189,7 @@ function armanage_custom_post_order_value( $column, $post_id ){
   add_post_type_support( 'services' ,  array( 'excerpt', 'thumbnail' ) );
   add_post_type_support( 'blog' ,  array( 'excerpt', 'thumbnail' ) );
   add_post_type_support( 'page' ,  'excerpt');
+  add_post_type_support( 'payments' ,  'thumbnail');
   
 
 
@@ -347,6 +371,16 @@ array(
   'taxonomies'  => array( 'services_placement' ),
 )
 );
+register_post_type( 'payments',
+array(
+  'labels' => array(
+    'name' => __( 'Payment Gateways' ),
+    'singular_name' => __( 'Gateways' )
+  ),
+  'public' => true,
+  'has_archive' => true,
+)
+);
   }
   add_action( 'init', 'armanage_post_types' );
 
@@ -389,15 +423,14 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
              $query1->the_post(); 
 
              global $post;
-             ?>
-                    <?php	
+	
                         // Numbers section	
                             if (in_array("numbers", $args)) {				
                                 $meta_number =  get_post_meta(get_the_id(), 'number', true);
                             ?>
                             
                         <div class="<?php echo $class; ?>">
-                            <div class="posts-excerpt">
+                            <div class="posts-excerpt adj-col">
                                 <?php 
                                     if( !empty( $meta_number ) ) { ?>
                                 <div class="excerpt-meta">
@@ -415,9 +448,7 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                                 </div>
                             </div>
                         </div>
-                        <?php }; ?>
-                    
-                    <?php
+                        <?php }; 
 
 
                     // Products Section (Our products)
@@ -484,6 +515,19 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                                             </div>
                         <?php
                             }
+
+                                // Payment gateways section	
+                                if (in_array("payments", $args)) {				
+                                ?>
+                                
+                            <div class="<?php echo $class; ?>">
+                                <div class="payment-img-outer adj-col col-md-2">
+
+                                    <?php the_post_thumbnail( $size, $attr ); ?>
+
+                                </div>
+                            </div>
+                            <?php }; 
                         
 
         endwhile; // End looping through custom sorted posts

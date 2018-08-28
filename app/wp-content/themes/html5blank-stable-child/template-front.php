@@ -4,7 +4,7 @@
  */
 
  get_header(); 
- 
+
  ?>
 	<section id="top"  class="row">
 		<div id="slogan-sec">
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</section>
-	<section id="numbers-outer" class="section-slider row">
+	<section id="numbers-outer" class="section-slider row adj-col-outer">
 		<div class="container">
 			<div id="numbers" class="carousel slide" data-ride="carousel">
 				<div class="slider-controls">
@@ -45,20 +45,20 @@
 			</div>
 		</div>
 	</section>
-	<section id="products" class="row section">
+	<section id="products" class="row section ">
 			<h2 class="title">Products</h2>    
 			<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'our-products' , '' , 'item' ); ?>
 			<div class="sec-icon">
 				<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/package-1.png" alt="package icon" />
 			</div>
 	</section>
-	<section id="third-parties" class="section">
+	<section id="third-parties" class="row section adj-col-outer">
 			<h2 class="title">Third Party Products</h2>
 			<div class="container">
 				<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'third-party-products' , '' , '' ); ?>
 			</div>
 	</section>
-	<section id="services" class="row section">
+	<section id="services" class="row section adj-col-outer">
 		<h2 class="title">Services</h2>
 		    <div class="container">
 				<?php armanage_generate_posts('services' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , ''  , '' , 'home-service-front-page-listed' , 'home-prods' ); ?>
@@ -71,7 +71,7 @@
 
 					</div>
 				<div class="carousel-inner" role="listbox">
-
+				<?php armanage_generate_posts('payments' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , '' , '' , 'item' ); ?>
 				</div>
 			</div>
 		</div>

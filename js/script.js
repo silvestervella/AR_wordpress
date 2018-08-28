@@ -12,6 +12,7 @@
    * window.load
    * 
    * 1. Pages anim 
+   * 2. Set equal height to divs
    */
 
   
@@ -181,8 +182,9 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
   jQuery('#numbers ').carousel({
     interval: 5000
   })
-  jQuery('#wl-specs ').carousel({
-    interval: 1700
+  jQuery('#pay-gateways ').carousel({
+    interval: 1700,
+    items: 5
   })
 
   jQuery('.carousel .item').each(function(){
@@ -216,22 +218,6 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
   jQuery("#products > .item:nth-child(odd)").find("div.featured-img").addClass("col-md-push-5").siblings(".excerpt").addClass("col-md-pull-7");
 
 
-  /**
-   * 7. Set equal height to divs
-   */
-
-var hiCol = 0;
-var h = 0;
-jQuery(".section").each(function(){
-  jQuery(this).find("div.adj-col").each(function(){
-    h = jQuery(this).height();
-    if(h > hiCol){
-      hiCol = h;
-    }    
-  });
-  jQuery(this).find("div.adj-col").css("height" , hiCol);  
-});
-
  
 // End of document.ready
 });
@@ -254,6 +240,23 @@ jQuery(window).load(function(){
   } else {
     jQuery(".home-h3").addClass("opacTrans-anim");
   }  
+
+
+
+    /**
+   * 2. Set equal height to divs
+   */
+  jQuery(".adj-col-outer").each(function(){
+    var hiCol = 0;
+    jQuery(this).find("div.adj-col").each(function(){
+
+      var h = jQuery(this).height();
+      if(h > hiCol){
+        hiCol = h; 
+      }  
+    });
+    jQuery(this).find('.adj-col').height(hiCol);  
+  });
 
 // End of window.load
 });
