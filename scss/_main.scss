@@ -8,6 +8,8 @@
 * 7. Front page live betting sec
 * 8. Front page mobile betitng sec
 * 9. Front page third party sec
+* 10. Front page services sec
+* 11. Front page payment gateways sec
 */
 
 
@@ -25,6 +27,17 @@ h2.title {
 .row {
     margin-left: 0;
     margin-right: 0;
+}
+.title {
+    margin: 0;
+    color: #fff;
+}
+.sec-icon {
+    padding: 80px 0;
+    text-align: center;
+    img {
+        width: 600px;
+    }
 }
 
 
@@ -78,7 +91,7 @@ h2.title {
     padding: 30px 0;
         .container {
             div {
-                .slider-controls {
+                .owl-nav{
                     display: block;
                     position: absolute;
                     top: 0;
@@ -87,13 +100,13 @@ h2.title {
                     transition: opacity 0.2s;
                     opacity: 0.3;
                     z-index: 999;
-                    a {
+                    button {
                         display: inline-block;
                         position: relative;
                         width: 40px;
                         padding: 5px;
                         margin-right: 2px;
-                        border: 1px solid #000;
+                        border: 1px solid #333;
                         border-radius: 10px;
                         text-align: center;
                         span {
@@ -103,9 +116,8 @@ h2.title {
                     }
                 }
                 .item {
+                    border: none;
                     .posts-excerpt {
-                        width: 32.43%;
-                        float: left;
                         padding: 0 15px;
                         margin: 0 5px;
                         .excerpt-text {
@@ -116,36 +128,6 @@ h2.title {
                 }
             }
         }
-                        /* override position and transform in 3.3.x */
-                        .carousel-inner .item.left.active {
-                            transform: translateX(-33%);
-                        }
-                        .carousel-inner .item.right.active {
-                            transform: translateX(33%);
-                        }
-                        
-                        .carousel-inner .item.next {
-                            transform: translateX(33%)
-                        }
-                        .carousel-inner .item.prev {
-                            transform: translateX(-33%)
-                        }
-                        
-                        .carousel-inner .item.right,
-                        .carousel-inner .item.left { 
-                            transform: translateX(0);
-                        }
-                        .title {
-                            margin: 0;
-                            color: #fff;
-                        }
-                        .sec-icon {
-                            padding: 80px 0;
-                            text-align: center;
-                            img {
-                                width: 600px;
-                            }
-                        }
 }
 
 
@@ -252,11 +234,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 #numbers-outer {
     background: $primary-color;
     color: #fff;
-    .carousel {
+    .owl-carousel {
         .item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            border: none;
             .posts-excerpt {
-                background: rgba(255,255,255,0.1);
-                border-radius: 10px;
                 .excerpt-meta {
                     font-size: 80px;
                     text-align: center;
@@ -271,11 +254,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
                 }
             }
         }
-        .slider-controls {
-            a {
+        .owl-nav {
+            button {
                 background: rgba(255,255,255,0.1);
                 border-color: #fff;
-                i {
+                span {
                     color: #fff;
                 }
             }
@@ -324,33 +307,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
                     right: 0;
                 }
             }
-        }/*
-            .container {
-                height: inherit;
-                div {
-                    height: inherit;
-                }
-            }
-            h3 {
-                color: #fff;
-                font-size: 40px;
-                top: 50%;
-                position: relative;
-                transform: translateY(-50%);
-                margin: 0;
-            }
-            .excerpt {
-                top: 50%;
-                position: relative;
-                transform: translateY(-50%);
-                &:after {
-                    content: '';
-                    width: 10%;
-                    display: block;
-                    padding-top: 20px;
-                    position: absolute;
-                }
-            }
+        }
 
     /* 6. Front page white label sec */
         #white-label-betting-software {
@@ -442,6 +399,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
             }
         }
 }
+
+/* 10. Front page services sec */
 #services {
     background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/services-back.jpg);
     background-size: cover;
@@ -467,6 +426,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
             img {
                 width: 128px
             }
+        }
+    }
+}
+
+
+/* 11. Front page payment gateways sec */
+
+#pay-gateways-outer {
+    .title {
+        color: #333;
+    }
+    .item {
+        padding: 30px;
+        img {
+            max-width: 130px;
+            margin: 0 auto;
         }
     }
 }

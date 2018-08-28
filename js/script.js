@@ -6,7 +6,7 @@
    * 2. Menu animations
    * 3. Games info slider
    * 4. No scroll on open menu
-   * 5. Carousel slider
+   * 5. Owl Carousel slider
    * 6. Products section add class to .item
    * 
    * window.load
@@ -177,39 +177,66 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
 })
 
 /**
- * 5. Carousel slider
- */
-  jQuery('#numbers ').carousel({
-    interval: 5000
-  })
-  jQuery('#pay-gateways ').carousel({
-    interval: 1700,
-    items: 5
-  })
+ * 5. Owl Carousel slider
+*/
 
-  jQuery('.carousel .item').each(function(){
-    var next = jQuery(this).next();
-    if (!next.length) {
-      next = jQuery(this).siblings(':first');
-    }
-    next.children(':first-child').clone().appendTo(jQuery(this));
-    
-    if (next.next().length>0) {
-      next.next().children(':first-child').clone().appendTo(jQuery(this));
-    }
-    else {
-      jQuery(this).siblings(':first').children(':first-child').clone().appendTo(jQuery(this));
-    }
+    var payDiv = jQuery("#pay-gateways"),
+    numDiv = jQuery("#numbers");
+
+    payDiv.owlCarousel({
+        loop:true,
+        margin:10,
+        dots: false,
+        responsiveClass:true,
+        autoplay:true,
+        autoplayTimeout:1700,
+        autoplayHoverPause:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:false
+            },
+            600:{
+                items:5,
+                nav:true
+            }
+        }
+
+    });
+    numDiv.owlCarousel({
+      loop:true,
+      margin:10,
+      dots: false,
+      responsiveClass:true,
+      autoplay:true,
+      autoplayTimeout:1700,
+      autoplayHoverPause:true,
+      responsive:{
+          0:{
+              items:1,
+              nav:false
+          },
+          600:{
+              items:3,
+              nav:true
+          }
+      }
+
   });
-
+    jQuery(".next").click(function(){ owl.trigger('owl.next'); });
+    jQuery(".prev").click(function(){ owl.trigger('owl.prev'); });
+  
+    
+  // slider controls hover opacity
   jQuery('.section-slider').mouseover(function(e){
     e.stopPropagation();
-    jQuery(this).find('.slider-controls').css({opacity: '1'});
+    jQuery(this).find('.owl-nav').css({opacity: '1'});
   });
   jQuery('.section-slider').mouseout(function(e){
     e.stopPropagation();
-    jQuery(this).find('.slider-controls').css({opacity: '0.3'});
+    jQuery(this).find('.owl-nav').css({opacity: '0.3'});
   })
+
 
 
   /**
@@ -218,7 +245,7 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
   jQuery("#products > .item:nth-child(odd)").find("div.featured-img").addClass("col-md-push-5").siblings(".excerpt").addClass("col-md-pull-7");
 
 
- 
+
 // End of document.ready
 });
 

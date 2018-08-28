@@ -49,22 +49,26 @@ function genId($arg1) {
     // Register Child Styles
     wp_register_style('child-fontawesome', get_stylesheet_directory_uri() . '/css/web-fonts-with-css/css/fontawesome-all.css', array(), '1.0', 'all');
     wp_register_style('armanage-child', get_stylesheet_directory_uri() . '/style.css', array(), '1.0', 'all');
-    wp_register_style('child-all', get_stylesheet_directory_uri() . '/css/all.css', array(), '1.0', 'all');
     wp_register_style('child-bootstrap', get_stylesheet_directory_uri() . '/css/bootstrap.min.css', array(), '1.0', 'all');
-    
+    wp_register_style('owlcarousel-style', get_stylesheet_directory_uri() . '/css/owl.carousel.min.css', array(), '1.0', 'all');
+    wp_register_style('child-all', get_stylesheet_directory_uri() . '/css/all.css', array(), '1.0', 'all');
+
     // Enqueue Child Styles
     wp_enqueue_style('child-fontawesome'); 
     wp_enqueue_style('armanage-child'); 
     wp_enqueue_style('child-bootstrap'); 
+    wp_enqueue_style('owlcarousel-style'); 
     wp_enqueue_style('child-all');
 
     //Register Child Scripts
     wp_register_script( 'bootstrap', get_stylesheet_directory_uri() . '/js/bootstrap.min.js', array( 'jquery' ) );
     wp_register_script( 'theme-script', get_stylesheet_directory_uri() . '/js/script.js', array( 'jquery' ) );
+    wp_register_script( 'owlcarousel', get_stylesheet_directory_uri() . '/js/owl.carousel.min.js', array( 'jquery' ) );
     
     // Enqueue Child Scripts
     wp_enqueue_script( 'bootstrap' ); 
     wp_enqueue_script( 'theme-script' );   
+    wp_enqueue_script( 'owlcarousel' );   
 
 }
     add_action('wp_enqueue_scripts', 'armanage_styles_child', 20); // Add Theme Child Stylesheet
@@ -430,7 +434,7 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                             ?>
                             
                         <div class="<?php echo $class; ?>">
-                            <div class="posts-excerpt adj-col">
+                            <div class="posts-excerpt">
                                 <?php 
                                     if( !empty( $meta_number ) ) { ?>
                                 <div class="excerpt-meta">
@@ -521,7 +525,7 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                                 ?>
                                 
                             <div class="<?php echo $class; ?>">
-                                <div class="payment-img-outer adj-col col-md-2">
+                                <div class="payment-img-outer ">
 
                                     <?php the_post_thumbnail( $size, $attr ); ?>
 
