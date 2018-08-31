@@ -14,6 +14,7 @@
  * 11. Post generator
  * 12. Products repeatable metaboxes
  * 13. Create taxonomy
+ * 14. Add options page to appearance menu
  */
 
 
@@ -104,41 +105,17 @@ $thumb = get_the_post_thumbnail_url();
 */
 /* Create custom meta data box to the post edit screen */
 function armanage_custom_post_sort( $post ){
-    add_meta_box( 
-      'custom_post_sort_box', 
-      'Position in List of Posts', 
-      'armanage_custom_post_order', 
-      'post' ,
-      'side'
-      );
-      add_meta_box( 
-        'custom_post_sort_box', 
-        'Position in List of Pages', 
-        'armanage_custom_post_order', 
-        'products' ,
-        'side'
-        );
+
+    $post_types = array('post','products','numbers','services','payments');
+    foreach($post_types as $post_type) {
         add_meta_box( 
             'custom_post_sort_box', 
-            'Position', 
+            'Position in List of Posts', 
             'armanage_custom_post_order', 
-            'numbers' ,
+            $post_type ,
             'side'
             );
-            add_meta_box( 
-                'custom_post_sort_box', 
-                'Position', 
-                'armanage_custom_post_order', 
-                'services' ,
-                'side'
-                );
-                add_meta_box( 
-                    'custom_post_sort_box', 
-                    'Position', 
-                    'armanage_custom_post_order', 
-                    'payments' ,
-                    'side'
-                    );
+    }
   }
   add_action( 'add_meta_boxes', 'armanage_custom_post_sort' );
 
@@ -281,17 +258,17 @@ function armanage_custom_admin_css() {
  * 
  * 8. Add custom metaboxes to posts
  */
-/**
- * Adds a meta box to the post editing screen
- */
+
+ // Adds a meta box to the post editing screen
+
 function armanage_custom_meta() {
     add_meta_box( 'armanage_meta', __( 'Number', 'armanage-number' ), 'armanage_meta_callback', 'numbers' );
 }
 add_action( 'add_meta_boxes', 'armanage_custom_meta' );
 
-/**
- * Outputs the content of the meta box
- */
+
+ // Outputs the content of the meta box
+
 function armanage_meta_callback( $post ) {
     wp_nonce_field( basename( __FILE__ ), 'armanage_nonce' );
     $armanage_stored_meta = get_post_meta( $post->ID );
@@ -306,9 +283,9 @@ function armanage_meta_callback( $post ) {
 }
 
 
-/**
- * Saves the custom meta input
- */
+
+ // Saves the custom meta input
+
 function armanage_meta_save( $post_id ) {
  
     // Checks save status
@@ -341,6 +318,7 @@ function armanage_post_types() {
         ),
         'public' => true,
         'has_archive' => true,
+        'taxonomies'  => array( 'blog_placement' ),
       )
     );
     register_post_type( 'numbers',
@@ -410,7 +388,7 @@ add_action( 'after_setup_theme', 'armanage_setup' );
 /**
  * 11. Post generator
 */
-function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key ,  $p_num_of_posts , $p_meta_box_val , $prod_type , $serv_place , $class  ) { 
+function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key ,  $p_num_of_posts , $p_meta_box_val , $prod_type , $serv_place ,$blog_type , $class  ) { 
         $args = array(
             'post_type' => $p_type,
             'orderby'   => $p_order_by,
@@ -419,7 +397,8 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
             'posts_per_page' => $p_num_of_posts,
             'category_name' => $p_meta_box_val,
             'product_type' => $prod_type,
-            'service_placement' => $serv_place
+            'service_placement' => $serv_place,
+            'blog_type' => $blog_type,
          );
          $query1 = new WP_query ( $args );
          if ( $query1->have_posts() ) :
@@ -532,6 +511,18 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                                 </div>
                             </div>
                             <?php }; 
+
+
+
+                                // Events section
+                                if (in_array("blog", $args)) {				
+                                    ?>
+                                    
+                                <div class="<?php echo $class; ?>">
+                                <div class="blur-div" style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>)"></div>
+                                <h3><?PHP the_title(); ?></h3>
+                                </div>
+                                <?php }; 
                         
 
         endwhile; // End looping through custom sorted posts
@@ -691,6 +682,24 @@ function atominktheme_custom_taxonomy() {
             'hierarchical' => true,
         )
     );
+    register_taxonomy(
+        'blog_type',
+        'blog',
+        array(
+            'label' => __( 'Type' ),
+            'rewrite' => array( 'slug' => 'blog_type' ),
+            'hierarchical' => true,
+        )
+    );
 }
 add_action( 'init', 'atominktheme_custom_taxonomy' );
+
+
+
+
+
+/**
+ * 14. Add options page to appearance menu
+ */
+
 ?>

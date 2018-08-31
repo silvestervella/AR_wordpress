@@ -181,6 +181,7 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
 */
 
     var payDiv = jQuery("#pay-gateways"),
+    blogDiv = jQuery("#events"),
     numDiv = jQuery("#numbers");
 
     payDiv.owlCarousel({
@@ -201,7 +202,6 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
                 nav:true
             }
         }
-
     });
     numDiv.owlCarousel({
       loop:true,
@@ -221,8 +221,17 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
               nav:true
           }
       }
-
   });
+  blogDiv.owlCarousel({
+    loop:true,
+    margin:10,
+    dots: false,
+    responsiveClass:true,
+    autoplay:true,
+    autoplayTimeout:3700,
+    autoplayHoverPause:true,
+    items: 1
+});
     jQuery(".next").click(function(){ owl.trigger('owl.next'); });
     jQuery(".prev").click(function(){ owl.trigger('owl.prev'); });
   
@@ -243,6 +252,14 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
    * 6. Products section add class to .item
    */
   jQuery("#products > .item:nth-child(odd)").find("div.featured-img").addClass("col-md-push-5").siblings(".excerpt").addClass("col-md-pull-7");
+
+
+/**
+ * 7. Front page upload button
+ */
+
+
+
 
 
 

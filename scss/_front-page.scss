@@ -1,92 +1,17 @@
 /*
-* 1. General
-* 2. Header
-* 3. Slider sections
-* 4. Front Page Top
-* 5. Front Page Numbers sec
-* 6. Front page white label sec
-* 7. Front page live betting sec
-* 8. Front page mobile betitng sec
-* 9. Front page third party sec
-* 10. Front page services sec
-* 11. Front page payment gateways sec
+* 1. Slider sections
+* 2. Front Page Top
+* 3. Front Page Numbers sec
+* 4. Front Page products sec
+* 5. Front page white label sec
+* 6. Front page third party sec
+* 7. Front page services sec
+* 8. Front page payment gateways sec
+* 9. Front page events sec
 */
 
 
-
-/* 1. General */
-html {
-    body {
-        font-size: 18px;
-    }
-}
-h2.title {
-    padding: 50px 0;
-    text-align: center;
-}
-.row {
-    margin-left: 0;
-    margin-right: 0;
-}
-.title {
-    margin: 0;
-    color: #fff;
-}
-.sec-icon {
-    padding: 80px 0;
-    text-align: center;
-    img {
-        width: 600px;
-    }
-}
-
-
-
-/* 2. Header */
-#header {
-    position: absolute;
-    width: 100%;
-    height: 100px;
-    z-index: 9;
-    .container {
-        height: inherit;
-        #logo {
-            float: left;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 250px;
-            width: 100%;
-            a {
-                width: 100%;
-            }
-        }
-        #main-nav-outer {
-            float: right;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-            nav {
-                ul#menu-top {
-                    margin: 0;
-                    padding: 0;
-                    li {
-                        display: inline-block;
-                        padding: 0 10px;
-                        a {
-                            padding: 5px;
-                            color: #fff;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-
-/* 3. Slider sections */
+/* 1. Slider sections */
 .section-slider , .section {
     padding: 30px 0;
         .container {
@@ -133,7 +58,7 @@ h2.title {
 
 
 
-/* 4. Front Page Top */
+/* 2. Front Page Top */
 #top {
     height: 100vh;
     width: 100%;
@@ -230,7 +155,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 }
 
 
-/* 5. Front Page Numbers sec */
+/* 3. Front Page Numbers sec */
 #numbers-outer {
     background: $primary-color;
     color: #fff;
@@ -267,6 +192,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
     }
 
 
+
+    /* 4. Front Page products sec */
     #products {
         background: #fff url(http://localhost/ARsite/app/wp-content/uploads/2018/08/white-label-back.jpg) no-repeat center;
         background-size: cover;
@@ -309,7 +236,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
             }
         }
 
-    /* 6. Front page white label sec */
+    /* 5. Front page white label sec */
         #white-label-betting-software {
             span {
                 display: block;
@@ -359,19 +286,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
                 }
             }
         }
-
-        /* 7. Front page live betting sec */
-        //#live-betting-grid {
-
-        //}
-        /* 8. Front page mobile betting sec */
-        //#mobile-betting {
-
-        //}
     }
 
 
-/* 9. Front page third party sec */
+/* 6. Front page third party sec */
 
 #third-parties {
     background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/third-p-back.png);
@@ -400,7 +318,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
         }
 }
 
-/* 10. Front page services sec */
+/* 7. Front page services sec */
 #services {
     background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/services-back.jpg);
     background-size: cover;
@@ -431,7 +349,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 }
 
 
-/* 11. Front page payment gateways sec */
+/* 8. Front page payment gateways sec */
 
 #pay-gateways-outer {
     .title {
@@ -442,6 +360,56 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
         img {
             max-width: 130px;
             margin: 0 auto;
+        }
+    }
+}
+
+
+
+/* 9. Front page events sec */
+
+#events-outer {
+    background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/evets-background.jpg);
+    background-size: cover;
+    .title {
+        color: #fff;
+    }
+    .item {
+        height: 300px;
+        background: unset;
+        padding: 0;
+        &:hover .blur-div {
+            filter: saturate(100%) blur(0px); 
+        }
+        .blur-div {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            filter: saturate(20%) blur(10px);
+            transition: filter 200ms linear;
+        }
+        h3 {
+            position: absolute;
+            width: 100%;
+            padding: 30px;
+            background: rgba(0,0,0,0.8);
+            margin: 0;
+            color: #fff;
+            text-align: right;
+        }
+    }
+    .owl-nav {
+        button {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+            span {
+                color: #fff;
+            }
         }
     }
 }

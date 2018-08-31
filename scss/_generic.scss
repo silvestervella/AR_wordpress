@@ -1,11 +1,17 @@
 /*
-Variables
+* 1. Variables
+* 2. Generic classes
+* 3. General
 */
+
+
+/* 1. Variables */
 $primary-color: #1875D1;
 $primary-color-two: #2196F3;
-/*
-Generic classes
-*/
+
+
+
+/* 2. Generic classes */
 .visible-posts {
     display: block !important;
 }
@@ -22,4 +28,31 @@ Generic classes
 .carousel-inner .carousel-item-right,
 .carousel-inner .carousel-item-left{ 
   transform: translateX(0);
+}
+
+
+/* 3. General */
+html {
+  body {
+      font-size: 18px;
+  }
+}
+h2.title {
+  padding: 50px 0;
+  text-align: center;
+}
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.title {
+  margin: 0;
+  color: #fff;
+}
+.sec-icon {
+  padding: 80px 0;
+  text-align: center;
+  img {
+      width: 600px;
+  }
 }
