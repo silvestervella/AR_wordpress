@@ -34,8 +34,8 @@
 	<section id="products" class="row section ">
 			<h2 class="title">Products</h2>    
 			<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'our-products' , '' ,'', 'item' ); ?>
-			<div class="sec-icon">
-				<img src="http://localhost/ARsite/app/wp-content/uploads/2018/08/package-1.png" alt="package icon" />
+			<div class="sec-read-more">
+				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Products' ) ) ); ?>">Read More..</a>
 			</div>
 	</section>
 	<section id="third-parties" class="row section adj-col-outer">
@@ -43,11 +43,17 @@
 			<div class="container">
 				<?php armanage_generate_posts('products' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , '' , 'third-party-products' , '' ,'', '' ); ?>
 			</div>
+			<div class="sec-read-more">
+				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Monthly Events' ) ) ); ?>">Read More..</a>
+			</div>
 	</section>
 	<section id="services" class="row section adj-col-outer">
 		<h2 class="title">Services</h2>
 		    <div class="container">
 				<?php armanage_generate_posts('services' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , ''  , '' , 'home-service-front-page-listed' ,'', 'home-prods' ); ?>
+			</div>
+			<div class="sec-read-more">
+				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Monthly Events' ) ) ); ?>">Read More..</a>
 			</div>
 	</section>
 	<section id="pay-gateways-outer" class="section-slider row adj-col-outer">
@@ -64,6 +70,9 @@
 				<div id="events" class="owl-carousel " >
 					<?php armanage_generate_posts('blog' , 'date' , 'ASC' , '' , '3' , '' , '' ,'', 'events' , 'thumbnail item' ); ?>
 				</div>
+			</div>
+			<div class="sec-read-more">
+				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Monthly Events' ) ) ); ?>">Read More..</a>
 			</div>
 	</section>
 	

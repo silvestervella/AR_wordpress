@@ -48,17 +48,17 @@ function genId($arg1) {
     function armanage_styles_child()
     {
     // Register Child Styles
-    wp_register_style('child-fontawesome', get_stylesheet_directory_uri() . '/css/web-fonts-with-css/css/fontawesome-all.css', array(), '1.0', 'all');
+    wp_register_style('child-fontawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', array(), '1.0', 'all');
     wp_register_style('armanage-child', get_stylesheet_directory_uri() . '/style.css', array(), '1.0', 'all');
     wp_register_style('child-bootstrap', get_stylesheet_directory_uri() . '/css/bootstrap.min.css', array(), '1.0', 'all');
     wp_register_style('owlcarousel-style', get_stylesheet_directory_uri() . '/css/owl.carousel.min.css', array(), '1.0', 'all');
     wp_register_style('child-all', get_stylesheet_directory_uri() . '/css/all.css', array(), '1.0', 'all');
 
     // Enqueue Child Styles
-    wp_enqueue_style('child-fontawesome'); 
-    wp_enqueue_style('armanage-child'); 
     wp_enqueue_style('child-bootstrap'); 
+    wp_enqueue_style('child-fontawesome'); 
     wp_enqueue_style('owlcarousel-style'); 
+    wp_enqueue_style('armanage-child'); 
     wp_enqueue_style('child-all');
 
     //Register Child Scripts
