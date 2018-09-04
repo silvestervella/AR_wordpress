@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: Products Template
+ * Template Name: Services Template
  */
 
  ?>
@@ -9,14 +9,13 @@
 <main role="main">
     <div class="posts-sec-outer" style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>)">
         <div class="container">
+            <h3><?php the_title(); ?></h3>
             <div class="posts-sec">
-                <h3><?php the_title(); ?></h3>
                 <?php    $args = array(
-                                    'post_type' => 'products',
+                                    'post_type' => 'services',
                                     'orderby'   => 'meta_value',
                                     'order' => 'ASC',
-                                    'meta_key' => '_custom_post_order',
-                                    'product_type' => 'our-products',
+                                    'meta_key' => '_custom_post_order'
                                     );
             
 
@@ -26,7 +25,7 @@
                                     $query1->the_post();
                                     global $post; ?>
 
-                                                <div class="row">
+                                                <div class="row cpt-outer">
                     
                                                     <div class="post-title col-xs-12">
                                                         <h5><?php the_title(); ?></h5>
@@ -60,6 +59,15 @@
                 ?>
             </div>
             <!-- /posts-sec -->
+            
+            <div id="single-pages-controls">
+                    <div class="prev-cpt">
+                        prev
+                    </div>
+                    <div class="next-cpt">
+                        next
+                    </div>
+            </div>
         </div>
         <!-- /container -->
     </div>

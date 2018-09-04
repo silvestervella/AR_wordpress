@@ -53,7 +53,7 @@
 				<?php armanage_generate_posts('services' , 'meta_value' , 'ASC' , '_custom_post_order' , '' , ''  , '' , 'home-service-front-page-listed' ,'', 'home-prods' ); ?>
 			</div>
 			<div class="sec-read-more">
-				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Monthly Events' ) ) ); ?>">Read More..</a>
+				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Services' ) ) ); ?>">Read More..</a>
 			</div>
 	</section>
 	<section id="pay-gateways-outer" class="section-slider row adj-col-outer">

@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: Products Template
+ * Template Name: Services Template
  */
 
  ?>
@@ -12,11 +12,10 @@
             <div class="posts-sec">
                 <h3><?php the_title(); ?></h3>
                 <?php    $args = array(
-                                    'post_type' => 'products',
+                                    'post_type' => 'services',
                                     'orderby'   => 'meta_value',
                                     'order' => 'ASC',
-                                    'meta_key' => '_custom_post_order',
-                                    'product_type' => 'our-products',
+                                    'meta_key' => '_custom_post_order'
                                     );
             
 

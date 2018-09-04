@@ -26,7 +26,7 @@
                                     $query1->the_post();
                                     global $post; ?>
 
-                                                <div class="row">
+                                                <div class="row cpt-outer">
                     
                                                     <div class="post-title col-xs-12">
                                                         <h5><?php the_title(); ?></h5>

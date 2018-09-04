@@ -14,7 +14,7 @@
  * 11. Post generator
  * 12. Products repeatable metaboxes
  * 13. Create taxonomy
- * 14. Add options page to appearance menu
+ * 14. Redirect unwanted pages to home
  */
 
 
@@ -605,7 +605,7 @@ jQuery(document).ready(function($) {
 		<td><input type="text" class="widefat" name="name[]" /></td>
 
 
-		<td><input type="text" class="widefat" name="url[]" value="http://" /></td>
+		<td><input type="text" class="widefat" name="url[]" value="" /></td>
 <td><a class="sort">|||</a></td>
 		
 	</tr>
@@ -697,9 +697,20 @@ add_action( 'init', 'atominktheme_custom_taxonomy' );
 
 
 
-
 /**
- * 14. Add options page to appearance menu
+ * 14. Redirect unwanted pages to home
  */
+
+/* Register template redirect action callback */
+add_action('template_redirect', 'meks_remove_wp_archives');
+ 
+/* Remove archives */
+function meks_remove_wp_archives(){
+  //If we are on category or tag or date or author archive
+  if( is_category() || is_tag() || is_date() || is_author() || is_archive() ) {
+    global $wp_query;
+    $wp_query->set_404(); //set to 404 not found page
+  }
+}
 
 ?>
