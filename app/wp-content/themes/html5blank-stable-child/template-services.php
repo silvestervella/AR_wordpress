@@ -59,15 +59,6 @@
                 ?>
             </div>
             <!-- /posts-sec -->
-            
-            <div id="single-pages-controls">
-                    <div class="prev-cpt">
-                        prev
-                    </div>
-                    <div class="next-cpt">
-                        next
-                    </div>
-            </div>
         </div>
         <!-- /container -->
     </div>

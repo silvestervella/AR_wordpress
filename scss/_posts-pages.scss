@@ -6,7 +6,8 @@
 
 /* 0. General */
 .posts-sec-outer {
-    background-size: cover;
+    background-attachment: fixed;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     padding: 50px 0 100px 0;
     h3 {
@@ -14,12 +15,12 @@
         text-align: center;
     } 
     .posts-sec {
-       //background: rgba(0,0,0,0.1);
         padding: 30px;
         .cpt-outer {
             padding: 100px 30px;
             opacity: 0.1;
-            transition: opacity 3s;
+            transition: all 1s;
+            transform: scale(0.8);
             &:nth-child(even) {
                 border: 1px solid lighten( $grey, 60% );
                 border-left: none;
@@ -39,6 +40,12 @@
                 font-size: 30px;
                 padding-bottom: 30px;
             }
+            ul {
+                li {
+                    float: left;
+                    margin: 0 0 0 40px;
+                }
+            }
             .meta-fields {
                 ul {
                     margin: 0;
@@ -47,7 +54,7 @@
                         float: left;
                         font-size: 20px;
                         font-weight: bold;
-                        margin-top: 20px;
+                        margin: 20px 0 0 0;
                     }
                 }
             }
@@ -58,12 +65,9 @@
             }
             &.active {
                 opacity: 1;
+                transform: scale(1);
             }
         }
-    }
-    #single-pages-controls {
-        position: fixed;
-        top: 50%;
     }
 }
 

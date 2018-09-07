@@ -8,12 +8,18 @@
    * 4. No scroll on open menu
    * 5. Owl Carousel slider
    * 6. Products section add class to .item
-   * 7. Pages pagination
+   * 7. CPT increment ID + add active class
+   * 
    * 
    * window.load
    * 
    * 1. Pages anim 
    * 2. Set equal height to divs
+   * 
+   * 
+   * window.resize + scoll
+   * 
+   * 1. CPT scrolling active divs
    */
 
   
@@ -39,17 +45,16 @@ jQuery(document).ready(function(){
     secWithSlider[this.id] = 0;
   });
   // Scrolling
-  /*
-  function scrollinFunc(prevDiv , nextDiv) {
-    jQuery(window).on(mousewheelevt, function(event) {
-      if (event.originalEvent.wheelDelta >= 0) {
-        prevDiv();
-        } else {
-          nextDiv();
-        }
-    });
-  }
-*/
+  jQuery.fn.isFullyInViewport = function() {
+    var elementTop = (jQuery(this).offset().top) + 120;
+    var elementBottom = elementTop + jQuery(this).outerHeight() / 2;
+  
+    var viewportTop = jQuery(window).scrollTop();
+    var viewportBottom = viewportTop + jQuery(window).height();
+  
+    return elementTop >= viewportTop && elementBottom <= viewportBottom;
+  };
+
 
   /*
   * 1. Home post pagination (1 post)
@@ -257,79 +262,22 @@ jQuery('#main-nav-outer').on(mousewheelevt, function(e) {
 
 
 /**
- * 7. Pages pagination
+ * 7. CPT increment ID + add active class
  */
 
 if (jQuery('.cpt-outer').length) {
   var i = 0,
   cptOuter = jQuery('.cpt-outer');
   
-
   cptOuter.each(function(){
       i++;
       var newID='cpt'+i;
       jQuery(this).attr('id',newID);
       jQuery(this).val(i);
   });
-
-
   cptOuter.first().addClass('active');
 
-  var theId = jQuery('.active').attr('id');
-
-
-  jQuery(".prev-cpt").click(function() {
-    
-    if (jQuery('.active').is(":first-child")) {
-
-      jQuery('.cpt-outer').last().addClass('active');
-      jQuery('.cpt-outer').first().removeClass('active')
-      scrollToId();
-
-    } else {
-
-      jQuery('.active').prev().addClass('active').next().removeClass('active');
-      scrollToId();
-
-    }
-});
-
-
-jQuery(".next-cpt").click(function() {
-  
-  if (jQuery('.active').is(":last-child")) {
-
-    jQuery('.cpt-outer').first().addClass('active');
-    jQuery('.cpt-outer').last().removeClass('active')
-    scrollToId();
-
-  } else {
-
-    jQuery('.active').next().addClass('active').prev().removeClass('active');
-    scrollToId();
-
-  }
-});
-
-
-function scrollToId() {
-  var theId = jQuery('.active').attr('id'),
-  half_height = jQuery(window).height()/2,
-  activeHeight = jQuery('.active').outerHeight()/2,
-  positionFromTop = half_height - activeHeight;
-
-  jQuery([document.documentElement, document.body]).animate({
-    scrollTop: jQuery('#'+theId).offset().top - positionFromTop
-}, 2000);
 }
-scrollToId();
-
-
-}
-
-
-
-
 
 
 // End of document.ready
@@ -371,17 +319,27 @@ jQuery(window).load(function(){
     jQuery(this).find('.adj-col').height(hiCol);  
   });
 
+
 // End of window.load
 });
 
 
 
-jQuery(window).on("resize",function(){  
-  if(jQuery(window).width()<992) {
-    jQuery(".home-h3").addClass("opacTrans-anim2");
-  } else {
-    jQuery(".home-h3").addClass("opacTrans-anim");
-  }  
 
-// End of window.resize  
-})
+
+jQuery(window).on('resize scroll', function() {
+
+  /* 1. CPT scrolling active divs */
+  jQuery('.cpt-outer').each(function() {
+      var activeColor = jQuery(this).attr('id');
+    if (jQuery(this).isFullyInViewport()) {
+      jQuery('#' + activeColor).addClass('active');
+    } else {
+      jQuery('#' + activeColor).removeClass('active');
+    }
+  });
+
+// End of window.resize + scroll 
+});
+
+

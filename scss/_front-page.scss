@@ -13,6 +13,9 @@
 /* 1. Slider sections */
 .section-slider , .section {
     padding: 30px 0;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
         .container {
             div {
                 .owl-nav{
@@ -194,8 +197,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 
     /* 4. Front Page products sec */
     #products {
-        background: #fff url(http://localhost/ARsite/app/wp-content/uploads/2018/08/white-label-back.jpg) no-repeat center;
-        background-size: cover;
+        background-color: #fff;
+        background-image: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/white-label-back.jpg);
         .title {
             color: #333;
         }
@@ -291,8 +294,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 /* 6. Front page third party sec */
 
 #third-parties {
-    background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/third-p-back.png);
-    background-size: cover;
+    background-color: #515071;
+    background-image: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/third-p-back.png);
     .title{
         color: #fff;
     }
@@ -319,8 +322,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 
 /* 7. Front page services sec */
 #services {
-    background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/services-back.jpg);
-    background-size: cover;
+    background-color: #515071;
+    background-image: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/services-back.jpg);
     .title{
         color: #fff;
     }
@@ -368,8 +371,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 /* 9. Front page events sec */
 
 #events-outer {
-    background: #515071 url(http://localhost/ARsite/app/wp-content/uploads/2018/08/evets-background.jpg);
-    background-size: cover;
+    background-color: #515071;
+    background-image: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/evets-background.jpg);
     .title {
         color: #fff;
     }
