@@ -2,6 +2,7 @@
 * 0. General
 * 1. Products page
 * 2. Services page
+* 3. TP products page
 */
 
 /* 0. General */
@@ -17,81 +18,99 @@
     .posts-sec {
         padding: 30px;
         .cpt-outer {
-            padding: 100px 30px;
+            padding: 50px 30px;
             opacity: 0.1;
             transition: all 1s;
             transform: scale(0.8);
-            &:nth-child(even) {
-                border: 1px solid lighten( $grey, 60% );
-                border-left: none;
-                border-bottom: none;
-                border-top-right-radius: 30px;
-            }
-            &:nth-child(odd) {
-                border: 1px solid lighten( $grey, 60% );
-                border-right: none;
-                border-bottom: none;
-                border-top-left-radius: 30px;
-            }
-            &:first-of-type {
-                border-top: 0px;
+            position: relative;
+            border-radius: 50px;
+            margin: 100px 0;
+            .cpt-background {
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+                opacity: 0.2;
+                filter: saturate(10%);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-radius: 50px;
             }
             h5 {
                 font-size: 30px;
                 padding-bottom: 30px;
+                text-align: center;
             }
-            ul {
+            .nav-tabs {
+                border: none;
                 li {
-                    float: left;
-                    margin: 0 0 0 40px;
+                    margin: 0;
+                    a {
+                        border: none;
+                    }
+                    &.active {
+                        border-bottom: 0.5px solid;
+                        a {
+                            background: none;
+                            border: none;
+                            margin: 0;
+                        }
+                    }
                 }
             }
-            .meta-fields {
+            .tab-pane {
+                padding: 30px 20px 20px 20px;
                 ul {
-                    margin: 0;
+                    list-style: circle;
                     li {
-                        width: 49.7%;
-                        float: left;
-                        font-size: 20px;
-                        font-weight: bold;
-                        margin: 20px 0 0 0;
+                        display: list-item;
+                        margin-bottom: 10px;
                     }
                 }
             }
             .feat-img {
+                text-align: center;
                 img {
                     margin-bottom: 30px;
+                    max-width: 400px;
                 }
             }
             &.active {
                 opacity: 1;
                 transform: scale(1);
+                background: rgba(255,255,255,0.1);
             }
         }
     }
 }
 
 /* 1. Products page */
+body.page-template-template-products {
+    .posts-sec-outer {
+        .cpt-outer.active {
+            background: rgba(0,0,0,0.1);
+        }
+        .post-content {
+            padding: 30px;
+            background: rgba(255,255,255,0.7);
+        }
+    }
+}
 
 
 /* 2. Services page */
 body.page-template-template-services {
     .posts-sec-outer {
         color: #fff;
-        .row {
-            padding: 100px 30px;
-            &:nth-child(even) {
-                border: 1px solid $grey;
-                border-left: none;
-                border-bottom: none;
-                border-top-right-radius: 30px;
-            }
-            &:nth-child(odd) {
-                border: 1px solid $grey;
-                border-right: none;
-                border-bottom: none;
-                border-top-left-radius: 30px;
-            }
-        }
+    }
+}
+
+
+/* 3. TP products page */
+body.page-template-template-tp-products {
+    .posts-sec-outer {
+        color: #fff;
     }
 }

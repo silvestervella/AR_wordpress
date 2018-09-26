@@ -46,8 +46,8 @@ jQuery(document).ready(function(){
   });
   // Scrolling
   jQuery.fn.isFullyInViewport = function() {
-    var elementTop = (jQuery(this).offset().top) + 120;
-    var elementBottom = elementTop + jQuery(this).outerHeight() / 2;
+    var elementTop = (jQuery(this).offset().top) + 300;
+    var elementBottom = elementTop + jQuery(this).outerHeight() / 4;
   
     var viewportTop = jQuery(window).scrollTop();
     var viewportBottom = viewportTop + jQuery(window).height();
@@ -279,6 +279,25 @@ if (jQuery('.cpt-outer').length) {
 
 }
 
+
+
+/**
+ * 8. Add active class to home products tabs
+ */
+jQuery('#products').find('.tab-pane.fade').first().addClass('active in');
+
+
+
+
+(function () {
+  var body = document.body,
+          e = document.documentElement,
+          scrollPercent;
+  jQuery(window).unbind("scroll").scroll(function () {
+      scrollPercent = 500 * jQuery(window).scrollTop() / (jQuery(document).height() - jQuery(window).height());
+      jQuery('#top').css('background-position' , "0px " + scrollPercent + "%" );
+  });
+})();
 
 // End of document.ready
 });

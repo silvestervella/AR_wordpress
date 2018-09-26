@@ -15,6 +15,10 @@
  * 12. Products repeatable metaboxes
  * 13. Create taxonomy
  * 14. Redirect unwanted pages to home
+ * 15. Get post thumbnail outside loop
+ * 16. Show page/post id in admin
+ * 17. Products + services template post generator
+ * 18. Increment number
  */
 
 
@@ -388,25 +392,26 @@ add_action( 'after_setup_theme', 'armanage_setup' );
 /**
  * 11. Post generator
 */
-function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key ,  $p_num_of_posts , $p_meta_box_val , $prod_type , $serv_place ,$blog_type , $class  ) { 
-        $args = array(
-            'post_type' => $p_type,
-            'orderby'   => $p_order_by,
-            'order' => $p_order,
-            'meta_key' => $p_meta_key,
-            'posts_per_page' => $p_num_of_posts,
-            'category_name' => $p_meta_box_val,
-            'product_type' => $prod_type,
-            'service_placement' => $serv_place,
-            'blog_type' => $blog_type,
-         );
-         $query1 = new WP_query ( $args );
-         if ( $query1->have_posts() ) :
-             while ($query1->have_posts() ) :
-             $query1->the_post(); 
+function armanage_front_page_posts($atts , $class) {
+    $args = array(
+        'post_type' => $atts['post_type'],
+        'orderby'   => $atts['orderby'],
+        'order' => $atts['order'],
+        'meta_key' => $atts['meta_key'],
+        'posts_per_page' => $atts['posts_per_page'],
+        'category_name' => $atts['category_name'],
+        'product_type' => $atts['product_type'],
+        'service_placement' => $atts['service_placement'],
+        'blog_type' => $atts['blog_type']
+        );
 
-             global $post;
-	
+
+    $query1 = new WP_query ( $args );
+    if ( $query1->have_posts() ) :
+        while ($query1->have_posts() ) :
+        $query1->the_post();
+        global $post; 
+
                         // Numbers section	
                             if (in_array("numbers", $args)) {				
                                 $meta_number =  get_post_meta(get_the_id(), 'number', true);
@@ -437,42 +442,26 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                     // Products Section (Our products)
                     if (in_array("our-products" , $args)) {					
                     ?>
-                            <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> ">
-                                <div class="container">
-                                    <h3><?php the_title(); ?></h3>
-                                    <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail( $size, $attr ); ?></div>
-                                    <div class="col-md-5 col-sm-12 excerpt">
-                                        <?php the_excerpt(); ?>
-                                    </div>
-                                    <?php /*  if($post->post_name == "white-label-betting-software") {  ?>
-                                        
-                                                <div id="wl-specs" class="carousel slide col-md-12" data-ride="carousel">
-                                                 <?php $repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);  if ( $repeatable_fields ) : ?>
-                                                    <ul class="carousel-inner" role="listbox">
-                                                        <?php foreach ( $repeatable_fields as $field ) { ?>
-                                                        <li class="<?php echo $class; ?>">
-                                                        <div>
-                                                            <?php if($field['name'] != '') echo '<span class="name">'. esc_attr( $field['name'] ) . '</span>'; ?>
-                                                        </div>
-                                                        </li>
-                                                        <?php }  ?> 
-                                                    </ul>
-                                                </div> 
-                                        <?php endif; ?>
-                                    <?php  } */ ?>
-                                </div>
+                        <div id="<?php incNumber(); ?>" class="tab-pane fade">
+                            <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> row">
+                                        <h3><?php the_title(); ?></h3>
+                                        <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail(); ?></div>
+                                        <div class="col-md-5 col-sm-12 excerpt">
+                                            <?php the_excerpt(); ?>
+                                        </div>
                             </div>
+                        </div>
                     <?php
-                        }
+                    }
 
-                    // Products Section (Our products)
+                    // Products Section (Tp products)
                     if (in_array("third-party-products" , $args)) {					
                         ?>
                                 <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?>">
                                         <div class="col-md-6">
                                             <div class="tp-prod-outer adj-col">
                                                 <div class="tp-img-outer">
-                                                    <?php the_post_thumbnail( $size, $attr ); ?>
+                                                    <?php the_post_thumbnail(); ?>
                                                 </div>
                                                 <h3><?php the_title(); ?></h3>
                                                 <div class="excerpt">
@@ -490,7 +479,7 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                                             <div class="col-md-4">
                                                 <div class="serv-outer  adj-col">
                                                     <div class="tp-img-outer">
-                                                        <?php the_post_thumbnail( $size, $attr ); ?>
+                                                        <?php the_post_thumbnail(); ?>
                                                     </div>
                                                     <h3><?PHP the_title(); ?></h3>
                                                     <div class="excerpt"><?PHP the_excerpt(); ?></div>
@@ -506,7 +495,7 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                             <div class="<?php echo $class; ?>">
                                 <div class="payment-img-outer ">
 
-                                    <?php the_post_thumbnail( $size, $attr ); ?>
+                                    <?php the_post_thumbnail(); ?>
 
                                 </div>
                             </div>
@@ -519,150 +508,27 @@ function armanage_generate_posts($p_type , $p_order_by , $p_order , $p_meta_key 
                                     ?>
                                     
                                 <div class="<?php echo $class; ?>">
-                                <div class="blur-div" style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>)"></div>
+                                <div class="event-img"><?php the_post_thumbnail($post->ID, 'thumbnail'); ?></div>
+                                <div class="event-text"><?php the_excerpt(); ?></div>
                                 <h3><?PHP the_title(); ?></h3>
                                 </div>
                                 <?php }; 
                         
+ endwhile; // End looping through custom sorted posts
+endif; // End loop 1  
+}
 
-        endwhile; // End looping through custom sorted posts
-        endif; // End loop 1
-    }  
 
 
 /**
  * 12. Products repeatable metaboxes
 */
-add_action('admin_init', 'add_meta_boxes', 1);
-function add_meta_boxes() {
-	add_meta_box( 'repeatable-fields', 'Product specs', 'repeatable_meta_box_display', 'products', 'normal', 'high');
-}
-function repeatable_meta_box_display() {
-	global $post;
-	$repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
-	wp_nonce_field( 'repeatable_meta_box_nonce', 'repeatable_meta_box_nonce' );
-?>
-	<script type="text/javascript">
-jQuery(document).ready(function($) {
-	$('.metabox_submit').click(function(e) {
-		e.preventDefault();
-		$('#publish').click();
-	});
-	$('#add-row').on('click', function() {
-		var row = $('.empty-row.screen-reader-text').clone(true);
-		row.removeClass('empty-row screen-reader-text');
-		row.insertBefore('#repeatable-fieldset-one tbody>tr:last');
-		return false;
-	});
-	$('.remove-row').on('click', function() {
-		$(this).parents('tr').remove();
-		return false;
-	});
-	$('#repeatable-fieldset-one tbody').sortable({
-		opacity: 0.6,
-		revert: true,
-		cursor: 'move',
-		handle: '.sort'
-	});
-});
-    </script>
 
-    <?php 
-        $custom = get_post_custom($post->ID);
-        $field_id = $custom["field_id"][0];
-    ?>
-
-	<table id="repeatable-fieldset-one" width="100%">
-	<thead>
-		<tr>
-			<th width="2%"></th>
-			<th width="30%">Name</th>
-			<th width="60%">Description</th>
-			<th width="2%"></th>
-		</tr>
-	</thead>
-	<tbody>
-	<?php
-    if ( $repeatable_fields ) :
-        
-		foreach ( $repeatable_fields as $field ) {
-?>
-	<tr>
-		<td><a class="button remove-row" href="#">-</a></td>
-		<td><input type="text" class="widefat" name="name[]" value="<?php if($field['name'] != '') echo esc_attr( $field['name'] ); ?>" /></td>
-
-		<td><input type="text" class="widefat" name="url[]" value="<?php if ($field['url'] != '') echo esc_attr( $field['url'] ); else echo 'Details..'; ?>" /></td>
-		<td><a class="sort">|||</a></td>
-		
-	</tr>
-	<?php
-		}
-	else :
-		// show a blank one
-?>
-	<tr>
-		<td><a class="button remove-row" href="#">-</a></td>
-		<td><input type="text" class="widefat" name="name[]" /></td>
-
-
-		<td><input type="text" class="widefat" name="url[]" value="" /></td>
-<td><a class="sort">|||</a></td>
-		
-	</tr>
-	<?php endif; ?>
-
-	<!-- empty hidden one for jQuery -->
-	<tr class="empty-row screen-reader-text">
-		<td><a class="button remove-row" href="#">-</a></td>
-		<td><input type="text" class="widefat" name="name[]" /></td>
-
-
-		<td><input type="text" class="widefat" name="url[]" value="http://" /></td>
-<td><a class="sort">|||</a></td>
-		
-	</tr>
-	</tbody>
-	</table>
-
-	<p><a id="add-row" class="button" href="#">Add another</a>
-	<input type="submit" class="metabox_submit" value="Save" />
-	</p>
-	
-	<?php
-}
-add_action('save_post', 'repeatable_meta_box_save');
-function repeatable_meta_box_save($post_id) {
-	if ( ! isset( $_POST['repeatable_meta_box_nonce'] ) ||
-		! wp_verify_nonce( $_POST['repeatable_meta_box_nonce'], 'repeatable_meta_box_nonce' ) )
-		return;
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-		return;
-	if (!current_user_can('edit_post', $post_id))
-		return;
-	$old = get_post_meta($post_id, 'repeatable_fields', true);
-	$new = array();
-	$names = $_POST['name'];
-    $urls = $_POST['url'];
-	$count = count( $names );
-	for ( $i = 0; $i < $count; $i++ ) {
-		if ( $names[$i] != '' ) :
-			$new[$i]['name'] = stripslashes( strip_tags( $names[$i] ) );
-		if ( $urls[$i] == 'Details..' )
-			$new[$i]['url'] = '';
-		else
-			$new[$i]['url'] = stripslashes( $urls[$i] ); // and however you want to sanitize
-		endif;
-	}
-	if ( !empty( $new ) && $new != $old )
-        update_post_meta( $post_id, 'repeatable_fields', $new );
-	elseif ( empty($new) && $old )
-		delete_post_meta( $post_id, 'repeatable_fields', $old );
-}
 
 /**
  * 13. Create taxonomy
  */
-function atominktheme_custom_taxonomy() {
+function armanage_custom_taxonomy() {
     // create a new taxonomy
     register_taxonomy(
         'product_type',
@@ -692,7 +558,7 @@ function atominktheme_custom_taxonomy() {
         )
     );
 }
-add_action( 'init', 'atominktheme_custom_taxonomy' );
+add_action( 'init', 'armanage_custom_taxonomy' );
 
 
 
@@ -713,4 +579,94 @@ function meks_remove_wp_archives(){
   }
 }
 
+
+
+/**
+ * 15. Get post thumbnail outside loop
+ */
+function armanage_get_post_page_thumb_url($id) {
+
+    $post = get_post($id);
+    $featured_img_url = get_the_post_thumbnail_url($post->ID, 'full'); 
+
+    return $featured_img_url;
+}
+
+
+
+/**
+ * 16. Show page/post id in admin
+ */
+add_filter( 'manage_posts_columns', 'armanage_revealid_add_id_column', 5 );
+add_action( 'manage_posts_custom_column', 'armanage_revealid_id_column_content', 5, 2 );
+add_filter( 'manage_pages_columns', 'armanage_revealid_add_id_column', 5 );
+add_action( 'manage_pages_custom_column', 'armanage_revealid_id_column_content', 5, 2 );
+
+function armanage_revealid_add_id_column( $columns ) {
+   $columns['revealid_id'] = 'ID';
+   return $columns;
+}
+
+function armanage_revealid_id_column_content( $column, $id ) {
+  if( 'revealid_id' == $column ) {
+    echo $id;
+  }
+}
+
+
+
+
+
+
+/**
+ * 17. Products + services template post generator
+ */
+function armanage_prod_serv_temp_post_gen($atts) {
+                    $args = array(
+                        'post_type' => $atts['post_type'],
+                        'orderby'   => $atts['orderby'],
+                        'order' => $atts['order'],
+                        'meta_key' => $atts['meta_key'],
+                        'product_type' => $atts['product_type'],
+                        );
+
+
+                    $query1 = new WP_query ( $args );
+                    if ( $query1->have_posts() ) :
+                        while ($query1->have_posts() ) :
+                        $query1->the_post();
+                        global $post; ?>
+
+                                    <div class="row cpt-outer">
+                                        <div class="cpt-background"   style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>)"></div>
+                                        <div class="cpt-inner">
+                                            <div class="post-title col-xs-12">
+                                                <h5><?php the_title(); ?></h5>
+                                            </div>
+
+                                            <div class="feat-img col-md-6 col-xs-12">
+                                            <?php the_post_thumbnail( ); ?>
+                                            </div>
+                                            
+                                            <div class="post-content col-md-6 col-xs-12">
+                                                <?php the_content(); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+        <?php endwhile; // End looping through custom sorted posts
+        endif; // End loop 1  
+}
+
+
+
+/**
+ * 18. Increment number
+ */
+function incNumber() {
+    static $counter = 0;
+    $counter++;
+
+    echo "$counter";
+}
 ?>

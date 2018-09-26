@@ -55,6 +55,20 @@
                 }
             }
         }
+        .sec-read-more {
+            text-align: right;
+            padding: 100px 0 20px 0;
+            a , a:hover , a:visited , a:active {
+                color: #fff;
+                text-decoration: none;
+                padding: 20px;
+                border: 1px solid;
+                border-radius: 30px;
+                i {
+                    margin-left: 10px;
+                }
+            }
+        }
 }
 
 
@@ -64,8 +78,10 @@
 #top {
     height: 100vh;
     width: 100%;
-    background: url('http://localhost/ARsite/app/wp-content/uploads/2018/07/home-top5-1.jpg') no-repeat center;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
     position: relative;
     #slogan-sec {
         position: relative;
@@ -73,7 +89,7 @@
         transform: translateY(-50%);
         height: 200px;
         width: 100%;
-        background: linear-gradient(45deg,rgba(25,118,210,.8) 0,rgba(25,118,210,.8) 50%,rgba(0,0,0,.0) 51%,rgba(0,0,0,.0) 100%);
+        //background: linear-gradient(45deg,rgba(25,118,210,.8) 0,rgba(25,118,210,.8) 50%,rgba(0,0,0,.0) 51%,rgba(0,0,0,.0) 100%);
         .container {
             height: inherit;
             position: relative;
@@ -94,11 +110,11 @@
             #slogan {
                 position: relative;
                 color: #fff;
-                width: 60%;
+                width: 70%;
                 transform: translateY(-50%);
                 height: auto;
                 top: 50%;
-                font-size: 30px;
+                font-size: 50px;
                 span {
                     font-size: 18px;
                     margin-right: 5px;
@@ -159,11 +175,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 
 /* 3. Front Page Numbers sec */
 #numbers-outer {
-    background: $primary-color;
-    color: #fff;
+    background: #fff;
+    color: $grey;
+    padding: 100px 0;
     .owl-carousel {
         .item {
-            background: rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.1);
             border-radius: 10px;
             border: none;
             .posts-excerpt {
@@ -177,63 +194,77 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
                     margin-bottom: 20px;
                 }
                 .excerpt-text {
-                    color: #fff;
+                    color: $grey;
                 }
             }
         }
         .owl-nav {
             button {
-                background: rgba(255,255,255,0.1);
-                border-color: #fff;
+                background: rgba(0,0,0,0.1);
+                border-color: $grey;
                 span {
-                    color: #fff;
+                    color: $grey;
                 }
             }
         }
     }
-    }
+}
 
 
 
     /* 4. Front Page products sec */
     #products {
         background-color: #fff;
-        background-image: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/white-label-back.jpg);
+        min-height: 100vh;
         .title {
             color: #333;
+        }
+        .nav-tabs {
+            border: none;
+            li {
+                width: 33.33%;
+                margin: 0;
+                border-bottom: 1px solid rgba(0,0,0,0.2);;
+                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dcdcdc+0,ffffff+15,ffffff+25,dcdcdc+100 */
+background: rgb(220,220,220); /* Old browsers */
+background: -moz-linear-gradient(45deg, rgba(220,220,220,1) 0%, rgba(255,255,255,1) 15%, rgba(255,255,255,1) 25%, rgba(220,220,220,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, rgba(220,220,220,1) 0%,rgba(255,255,255,1) 15%,rgba(255,255,255,1) 25%,rgba(220,220,220,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, rgba(220,220,220,1) 0%,rgba(255,255,255,1) 15%,rgba(255,255,255,1) 25%,rgba(220,220,220,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdcdc', endColorstr='#dcdcdc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+                &.active {
+                    border: 1px solid rgba(0,0,0,0.2);;
+                    border-bottom: none;
+                    background: rgba(0,0,0,0.1);
+                    a {
+                        background: 0 0;
+                        border: none;
+                        margin: 0;
+                    }
+                }
+                a {
+                    border: none;
+                    font-size: 20px;
+                }
+            }
+        }
+        .tab-content {
+            border-top: none;
+            background: rgba(0,0,0,0.05);
+            padding: 15px;
         }
         .item {
             .container {
                 position: relative;
             }
             padding: 50px 0;
-            .excerpt {
-                color: #000;
-                top: 50%;
-                transform: translateY(-50%);
-                position: absolute;
-                &:after {
-                    content: '';
-                    border-bottom: 2px solid #000;
-                }
-            }
             h3 {
                 color: #333;
             }
             .featured-img {
+                text-align: center;
                 img {
-                    width: 450px;
+                    height: 300px;
                     margin: 0 auto;
-                }
-            }
-            &:nth-child(odd) {
-                .featured-img , h3 {
-                    text-align: right;
-                }
-            }
-            &:nth-child(even) {
-                .excerpt {
-                    right: 0;
                 }
             }
         }
@@ -288,6 +319,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
                 }
             }
         }
+        .sec-read-more {
+            a , a:hover , a:visited , a:active {
+                color: #000;
+            }
+        }
     }
 
 
@@ -295,7 +331,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 
 #third-parties {
     background-color: #515071;
-    background-image: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/third-p-back.png);
     .title{
         color: #fff;
     }
@@ -315,7 +350,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
                 color: #fff;  
             }
             .tp-img-outer {
-                text-align: center
+                text-align: center;
+                img {
+                    max-width: 150px;
+                }
             }
         }
 }
@@ -323,7 +361,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 /* 7. Front page services sec */
 #services {
     background-color: #515071;
-    background-image: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/services-back.jpg);
     .title{
         color: #fff;
     }
@@ -372,28 +409,54 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 
 #events-outer {
     background-color: #515071;
-    background-image: url(http://localhost/ARsite/app/wp-content/uploads/2018/08/evets-background.jpg);
+    background-position: bottom;
     .title {
         color: #fff;
+    }
+    .owl-item {
+        background: rgba(255,255,255,0.1);
+        .thumbnail {
+            margin-bottom: 0;
+        }
     }
     .item {
         height: 300px;
         background: unset;
         padding: 0;
-        &:hover .blur-div {
-            filter: saturate(100%) blur(0px); 
+        &:hover .event-img {
+            filter: saturate(100%); 
         }
-        .blur-div {
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            position: absolute;
-            width: 100%;
+        .event-img {
+            width: 50%;
             height: 100%;
-            top: 0;
-            left: 0;
-            filter: saturate(20%) blur(10px);
+            float: left;
+            filter: saturate(20%);
             transition: filter 200ms linear;
+            position: relative;
+            img {
+                position: relative;
+                top: 40%;
+                left: 50%;
+                transform: translateX(-50%);
+                max-width: 70%;
+                max-height: 50%
+            }
+        }
+        .event-text  {
+            width: 50%;
+            height: 100%;
+            float: left;
+            position: relative;
+            padding-right: 15px;
+            p {
+                position: relative;
+                top: 40%;
+                max-height: 50%;
+                color: #fff;
+            }
+            a {
+                display: none;
+            }
         }
         h3 {
             position: absolute;
