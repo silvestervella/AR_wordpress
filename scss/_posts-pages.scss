@@ -1,22 +1,22 @@
 /**
 * 0. General
 * 1. Products page
-* 2. Services page
-* 3. TP products page
 */
 
 /* 0. General */
 .posts-sec-outer {
-    background-attachment: fixed;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     padding: 50px 0 100px 0;
+    color: #fff;
     h3 {
         font-size: 28px;
         text-align: center;
+        padding: 0 0 100px 0;
+    }
+    .page-text {
+        padding: 0 0 100px 0;
+        font-size: 18px;
     } 
     .posts-sec {
-        padding: 30px;
         .cpt-outer {
             padding: 50px 30px;
             opacity: 0.1;
@@ -24,7 +24,10 @@
             transform: scale(0.8);
             position: relative;
             border-radius: 50px;
-            margin: 100px 0;
+            margin: 150px 0;
+            &:first-child {
+                margin: 0 0 150px 0;
+            }
             .cpt-background {
                 background-repeat: no-repeat;
                 background-size: cover;
@@ -89,6 +92,7 @@
 /* 1. Products page */
 body.page-template-template-products {
     .posts-sec-outer {
+        color: $grey;
         .cpt-outer.active {
             background: rgba(0,0,0,0.1);
         }
@@ -96,21 +100,74 @@ body.page-template-template-products {
             padding: 30px;
             background: rgba(255,255,255,0.7);
         }
-    }
-}
-
-
-/* 2. Services page */
-body.page-template-template-services {
-    .posts-sec-outer {
-        color: #fff;
-    }
-}
-
-
-/* 3. TP products page */
-body.page-template-template-tp-products {
-    .posts-sec-outer {
-        color: #fff;
+        #prod-page-tp {
+            background: $primary-color-two;
+            position: relative;
+            min-height: 200px;
+            overflow: hidden;
+            border-radius: 0 60px;
+            &:hover {
+                #tp-overlay {
+                    transform: skew(-35deg) translateX(120%);
+                    transition-delay: 0s;
+                }
+                .tp-thumbs {
+                    transform: translateY(60%);
+                    &#tp-link {
+                        transform: translateY(70%);
+                    }
+                }
+            }
+            #tp-overlay {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: $grey;
+                animation: tp-overlay 3s ease-in-out infinite ;
+                transform: skew(-35deg) translateX(10%);
+                border-left: 10px solid white;
+                transition: all 0.5s;
+                z-index: 9;
+                transition-delay: 0.8s;
+            }
+            .tp-thumbs {
+                width: 19.75%;
+                display: inline-block;
+                transform: translateY(-100%);
+                transition-property: all;
+                transition-duration: 1s;
+                text-align: center;
+                font-size: 18px;
+                color: #fff;
+                &#tp-link {
+                    transform: translateY(-300%);
+                    a {
+                        color: white;
+                        font-size: 30px;
+                        text-decoration: none;
+                        animation: tp-link 1.5s ease-in-out infinite ;
+                    }
+                }
+                img {
+                    max-width: 70px;
+                    margin: 0 auto;
+                    display: block;
+                }
+            }
+            #tp-view {
+                width: 100%;
+                display: block;
+                transform: skew(35deg) translate(60px ,-50%);
+                font-size: 30px;
+                position: relative;
+                top: 50%;
+                color: #fff;
+                i {
+                    position: absolute;
+                    left: -100px;
+                    animation: tp-arrow 1.5s ease-in-out infinite ;
+                }
+            }
+        }
     }
 }

@@ -168,13 +168,7 @@ function armanage_custom_post_order_value( $column, $post_id ){
   /**
    * 5. Add posts features
    */
-  add_theme_support( 'post-thumbnails', array( 'post', 'page'  ) );
 
-  add_post_type_support( 'products' ,  array( 'excerpt', 'thumbnail' ) );
-  add_post_type_support( 'services' ,  array( 'excerpt', 'thumbnail' ) );
-  add_post_type_support( 'blog' ,  array( 'excerpt', 'thumbnail' ) );
-  add_post_type_support( 'page' ,  'excerpt');
-  add_post_type_support( 'payments' ,  'thumbnail');
   
 
 
@@ -323,6 +317,7 @@ function armanage_post_types() {
         'public' => true,
         'has_archive' => true,
         'taxonomies'  => array( 'blog_placement' ),
+        'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
       )
     );
     register_post_type( 'numbers',
@@ -333,6 +328,7 @@ function armanage_post_types() {
       ),
       'public' => true,
       'has_archive' => true,
+      'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
     )
   );
   register_post_type( 'products',
@@ -344,6 +340,7 @@ function armanage_post_types() {
     'public' => true,
     'has_archive' => true,
     'taxonomies'  => array( 'product_type' ),
+    'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
   )
 );
 register_post_type( 'services',
@@ -355,6 +352,7 @@ array(
   'public' => true,
   'has_archive' => true,
   'taxonomies'  => array( 'services_placement' ),
+  'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
 )
 );
 register_post_type( 'payments',
@@ -365,6 +363,7 @@ array(
   ),
   'public' => true,
   'has_archive' => true,
+  'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
 )
 );
   }
@@ -638,7 +637,7 @@ function armanage_prod_serv_temp_post_gen($atts) {
                         global $post; ?>
 
                                     <div class="row cpt-outer">
-                                        <div class="cpt-background"   style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>)"></div>
+                                        <div class="cpt-background"   style="background-image: url(<?php echo esc_url( get_post_meta( get_the_ID(), 'background-image', true ) ); ?>)"></div>
                                         <div class="cpt-inner">
                                             <div class="post-title col-xs-12">
                                                 <h5><?php the_title(); ?></h5>
@@ -669,4 +668,16 @@ function incNumber() {
 
     echo "$counter";
 }
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

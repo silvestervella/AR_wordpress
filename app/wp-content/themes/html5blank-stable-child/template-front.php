@@ -65,7 +65,7 @@
 				</div>
 			</div>
 			<div class="sec-read-more container">
-				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Monthly Events' ) ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'News' ) ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 			</div>
 	</section>
 

@@ -2,6 +2,8 @@
 * 1. Variables
 * 2. Generic classes
 * 3. General
+* 4. Functions
+* 5. Animations
 */
 
 
@@ -39,6 +41,12 @@ $grey: #333;
 html {
   body {
       font-size: 16px;
+      main {
+        padding-top: 100px;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
   }
 }
 h2.title {
@@ -62,4 +70,33 @@ h2.title {
 }
 a {
   color: #1875D1;
+}
+
+
+
+/* 4. Functions */
+@for $i from 1 through 6 {
+  #prod-page-tp .tp-thumbs:nth-child(#{$i}) {
+    transition-delay:(#{$i*0.08s}); 
+  }
+}
+
+
+/* 5. Animations */
+@keyframes tp-overlay {
+  0% { margin-left: 10px;}
+  50%  { margin-left: 0px;}
+  100%  {margin-left: 10px;}
+}
+
+@keyframes tp-arrow {
+  0% {opacity: 1; transform: translateX(-20px)}
+  50%  {opacity: 0; transform: translateX(0px)}
+  100%  {opacity: 1; transform: translateX(-20px)}
+}
+
+@keyframes tp-link {
+  0% {opacity: 1;}
+  50%  {opacity: 0.3;}
+  100%  {opacity: 1;}
 }

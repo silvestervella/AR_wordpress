@@ -58,6 +58,7 @@
         .sec-read-more {
             text-align: right;
             padding: 100px 0 20px 0;
+            transform: translateX(-30px);
             a , a:hover , a:visited , a:active {
                 color: #fff;
                 text-decoration: none;
@@ -80,7 +81,6 @@
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
     background-attachment: fixed;
     position: relative;
     #slogan-sec {
@@ -234,16 +234,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdcdc', end
                 &.active {
                     border: 1px solid rgba(0,0,0,0.2);;
                     border-bottom: none;
-                    background: rgba(0,0,0,0.1);
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cecdcc+0,efefef+18,cecdcc+100 */
+background: rgb(206,205,204); /* Old browsers */
+background: -moz-linear-gradient(45deg, rgba(206,205,204,1) 0%, rgba(239,239,239,1) 18%, rgba(206,205,204,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, rgba(206,205,204,1) 0%,rgba(239,239,239,1) 18%,rgba(206,205,204,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, rgba(206,205,204,1) 0%,rgba(239,239,239,1) 18%,rgba(206,205,204,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecdcc', endColorstr='#cecdcc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
                     a {
                         background: 0 0;
                         border: none;
                         margin: 0;
                     }
                 }
+                &:first-child.active {
+                    border-left: none; 
+                }
+                &:last-child.active {
+                    border-right: none; 
+                }
                 a {
                     border: none;
                     font-size: 20px;
+                    color: $grey;
                 }
             }
         }
@@ -251,6 +263,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdcdc', end
             border-top: none;
             background: rgba(0,0,0,0.05);
             padding: 15px;
+            .tab-pane {
+                .item {
+                    h3 {
+                        display: none;
+                    }
+                }
+            }
         }
         .item {
             .container {
@@ -468,12 +487,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdcdc', end
             text-align: right;
         }
     }
-    .owl-nav {
-        button {
-            background: rgba(255,255,255,0.1);
-            border-color: #fff;
-            span {
-                color: #fff;
+    .owl-stage-outer {
+        border-radius: 0 60px;
+        .owl-nav {
+            button {
+                background: rgba(255,255,255,0.1);
+                border-color: #fff;
+                span {
+                    color: #fff;
+                }
             }
         }
     }
