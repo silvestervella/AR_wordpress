@@ -1,6 +1,7 @@
 /**
 * 0. General
 * 1. Products page
+* 2. About page
 */
 
 /* 0. General */
@@ -171,3 +172,82 @@ body.page-template-template-products {
         }
     }
 }
+
+
+/* 2. About page */
+body.page-template-template-about {
+    .posts-sec-outer {
+        color: $grey;
+        #frame-outer {
+            position: relative;
+            #vid-frame {
+                height: 350px;
+                width: 100%;
+            }
+        }
+        .vid-item {
+            width: 100%;
+            display: inline-block;
+            position: relative;
+            border: 0;
+            &:nth-child(odd) {
+                margin-right: 10px;
+            }
+            &:nth-child(even) {
+                margin-left: 10px;
+            }
+            img {
+                width: 100%;
+                filter: saturate(50%) opacity(60%);
+                transition: all 0.5s;
+                cursor: pointer;
+                padding: 20px 0;
+                border-bottom: 1px solid lighten($grey, 50%);
+                &:hover {
+                    filter: saturate(100%) opacity(100%);
+                }
+            }
+        }
+        .owl-nav{
+            display: block;
+            position: absolute;
+            bottom: 0;
+            width: auto;
+            transition: opacity 0.2s;
+            opacity: 0.3;
+            z-index: 999;
+            button {
+                display: inline-block;
+                position: relative;
+                width: 40px;
+                padding: 5px;
+                margin-right: 2px;
+                border: 1px solid $grey;
+                border-radius: 10px;
+                text-align: center;
+                span {
+                    position: relative;
+                    color: $grey;
+                }
+            }
+        }
+        .aboutus-contact-sec {
+            ul {
+                margin-top: 50px;
+                color: lighten($grey, 50%);
+                padding: 0 15px;
+                li {
+                    margin-bottom: 10px;
+                    i {
+                        color: $grey;
+                        margin-right: 10px;
+                    }
+                    a {
+                        color: $grey;
+                    }
+                }
+            }
+        }
+    }
+}
+

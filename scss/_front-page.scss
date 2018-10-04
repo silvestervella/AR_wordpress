@@ -33,7 +33,7 @@
                         width: 40px;
                         padding: 5px;
                         margin-right: 2px;
-                        border: 1px solid #333;
+                        border: 1px solid $grey;
                         border-radius: 10px;
                         text-align: center;
                         span {
@@ -53,6 +53,12 @@
 
                     }
                 }
+            }
+            .link-to-page {
+                width: 100%;
+                height: 100%;
+                display: block;
+                padding: 30px;
             }
         }
         .sec-read-more {
@@ -178,6 +184,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
     background: #fff;
     color: $grey;
     padding: 100px 0;
+    &:hover {
+        .owl-nav {
+            opacity: 1;
+        }
+    }
+    h2 {
+        color: $grey;
+    }
     .owl-carousel {
         .item {
             background: rgba(0,0,0,0.1);
@@ -199,6 +213,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
             }
         }
         .owl-nav {
+            transition: opacity 0.5s;
             button {
                 background: rgba(0,0,0,0.1);
                 border-color: $grey;
@@ -217,7 +232,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
         background-color: #fff;
         min-height: 100vh;
         .title {
-            color: #333;
+            color: $grey;
         }
         .nav-tabs {
             border: none;
@@ -277,7 +292,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecdcc', end
             }
             padding: 50px 0;
             h3 {
-                color: #333;
+                color: $grey;
             }
             .featured-img {
                 text-align: center;
@@ -318,7 +333,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecdcc', end
                     list-style: none;
                     padding: 0;
                     margin: 30px 0 0 0;
-                    background: #333;
+                    background: $grey;
                     .item {
                         padding: 0;
                         margin: 0;
@@ -355,18 +370,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecdcc', end
     }
         .tp-prod-outer {
             background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.01);
             border-radius: 30px;
-            padding: 30px;
             max-width: 400px;
             margin: 30px auto;
             position: relative;
+            transition: all 0.5s;
+            text-align: center;
+            &:hover {
+                background: rgba(255,255,255,0.2);
+                border: 1px solid rgba(255,255,255,0.5);
+            }
             h3 {
                 text-align: center;
                 padding: 10px 0 50px 0;
-                color: #fff
+                color: #fff;
+                display: inline-block;
             }
             .excerpt {
-                color: #fff;  
+                color: #fff; 
+                display: inline-block;
+                text-align: left;
             }
             .tp-img-outer {
                 text-align: center;
@@ -386,16 +410,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecdcc', end
     .serv-outer {
         background: rgba(255,255,255,0.1);
         border-radius: 30px;
-        padding: 30px;
         margin: 30px auto;
         position: relative;
+        border: 1px solid rgba(255,255,255,0.01);
+        text-align: center;
+        transition: all 0.5s;
+        &:hover {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
         h3 {
             text-align: center;
             padding: 10px 0 50px 0;
-            color: #fff
+            color: #fff;
+            display: inline-block;
         }
         .excerpt {
-            color: #fff;  
+            color: #fff;
+            display: inline-block;
+            text-align: left;
         }
         .tp-img-outer {
             text-align: center;
@@ -410,8 +443,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecdcc', end
 /* 8. Front page payment gateways sec */
 
 #pay-gateways-outer {
+    &:hover {
+        .owl-nav {
+            opacity: 1;
+        }
+    }
+    .owl-nav {
+        transition: opacity 0.5s;
+    }
     .title {
-        color: #333;
+        color: $grey;
     }
     .item {
         padding: 30px;
@@ -429,6 +470,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecdcc', end
 #events-outer {
     background-color: #515071;
     background-position: bottom;
+    &:hover {
+        .owl-nav {
+            opacity: 1;
+        }
+    }
     .title {
         color: #fff;
     }
@@ -489,13 +535,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecdcc', end
     }
     .owl-stage-outer {
         border-radius: 0 60px;
-        .owl-nav {
-            button {
-                background: rgba(255,255,255,0.1);
-                border-color: #fff;
-                span {
-                    color: #fff;
-                }
+    }
+    .owl-nav {
+        transition: opacity 0.5s;
+        button {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+            span {
+                color: #fff;
             }
         }
     }

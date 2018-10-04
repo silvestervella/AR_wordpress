@@ -54,7 +54,6 @@
 										<input type="submit" class="form-submit" value="Send">
 									</form>
 						-->
-						<?php echo do_shortcode( '[armanage_contact_form]' ); ?>
 						</div>
 
 					</div>
@@ -83,13 +82,10 @@
 					</div>
 				</div>
 
-				<div id="copyrights-skype">
+				<div id="copyrights">
 					<div class="container">
 						<div class="col-md-6 col-xs-12">
-							Copyright 2008 - 2018 © AR Management LTD. All rights reserved.  <a href="bettingsoftware.html">betting software</a>
-						</div>
-						<div class="col-md-6 col-xs-12">
-							<a href="skype:bookmakerfuture?chat"><img src="images/common/Skype_2017.png" alt="skype chat button">Chat with us</a>
+							© Copyright 2008 - <?php echo date("Y"); ?>. AR Management LTD. All rights reserved.  <a hidden href="bettingsoftware.html">betting software</a>
 						</div>
 					</div>
 				</div>

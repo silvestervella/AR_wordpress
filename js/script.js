@@ -13,6 +13,7 @@
    * 
    * 1. Pages anim 
    * 2. Set equal height to divs
+   * 3. About page videos
    * 
    * 
    * window.resize + scoll
@@ -57,6 +58,7 @@ jQuery(document).ready(function(){
 
     var payDiv = jQuery("#pay-gateways"),
     blogDiv = jQuery("#events"),
+    aboutPageVids = jQuery("#about-vids"),
     numDiv = jQuery("#numbers");
 
     payDiv.owlCarousel({
@@ -78,6 +80,25 @@ jQuery(document).ready(function(){
             }
         }
     });
+    aboutPageVids.owlCarousel({
+      loop:true,
+      margin:10,
+      dots: false,
+      responsiveClass:true,
+      autoplay:false,
+      autoplayTimeout:1700,
+      autoplayHoverPause:true,
+      responsive:{
+          0:{
+              items:1,
+              nav:false
+          },
+          600:{
+              items:2,
+              nav:true
+          }
+      }
+  });
     numDiv.owlCarousel({
       loop:true,
       margin:10,
@@ -110,17 +131,6 @@ jQuery(document).ready(function(){
     jQuery(".next").click(function(){ owl.trigger('owl.next'); });
     jQuery(".prev").click(function(){ owl.trigger('owl.prev'); });
   
-    
-  // slider controls hover opacity
-  jQuery('.section-slider').mouseover(function(e){
-    e.stopPropagation();
-    jQuery(this).find('.owl-nav').css({opacity: '1'});
-  });
-  jQuery('.section-slider').mouseout(function(e){
-    e.stopPropagation();
-    jQuery(this).find('.owl-nav').css({opacity: '0.3'});
-  })
-
 
 
   /**
@@ -174,6 +184,7 @@ if (jQuery('body.home').length) {
   homeParallexEffect();
 }
 
+
 // End of document.ready
 });
 
@@ -212,6 +223,31 @@ jQuery(window).load(function(){
     });
     jQuery(this).find('.adj-col').height(hiCol);  
   });
+
+
+
+
+
+
+  /**
+ * 3. About page videos
+ */
+if (jQuery('body.page-template-template-about').length) {
+  var vidSrc = jQuery('.owl-item.active > .vid-item').first().attr('data-value');
+    function lastPartUrl() {
+      parts = vidSrc.split("/"),
+      last_part = parts[parts.length-1]
+      return last_part;
+    }
+    embedUrl = "https://www.youtube.com/embed/";
+
+  jQuery('#vid-frame').attr('src' , embedUrl + lastPartUrl()); 
+
+  jQuery('.vid-item').on('click',function(){
+    vidSrc = jQuery(this).attr('data-value');
+    jQuery('#vid-frame').attr('src', embedUrl + lastPartUrl());
+  })
+}
 
 
 // End of window.load

@@ -19,6 +19,7 @@
  * 16. Show page/post id in admin
  * 17. Products + services template post generator
  * 18. Increment number
+ * 19. Get youtube video title
  */
 
 
@@ -458,15 +459,17 @@ function armanage_front_page_posts($atts , $class) {
                         ?>
                                 <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?>">
                                         <div class="col-md-6">
-                                            <div class="tp-prod-outer adj-col">
-                                                <div class="tp-img-outer">
-                                                    <?php the_post_thumbnail(); ?>
+                                                <div class="tp-prod-outer adj-col">
+                                                    <a class="link-to-page" href="<?php echo esc_url( get_permalink( get_page_by_title( 'Third Party Products' ) ) ); ?>">
+                                                        <div class="tp-img-outer">
+                                                            <?php the_post_thumbnail(); ?>
+                                                        </div>
+                                                        <h3><?php the_title(); ?></h3>
+                                                        <div class="excerpt">
+                                                            <?php the_excerpt(); ?>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                                <h3><?php the_title(); ?></h3>
-                                                <div class="excerpt">
-                                                    <?php the_excerpt(); ?>
-                                                </div>
-                                            </div>
                                         </div>
                                 </div>
                         <?php
@@ -475,15 +478,17 @@ function armanage_front_page_posts($atts , $class) {
                     // Services
                     if (in_array("home-service-front-page-listed" , $args)) {				
                         ?>
-                                            <div class="col-md-4">
-                                                <div class="serv-outer  adj-col">
-                                                    <div class="tp-img-outer">
-                                                        <?php the_post_thumbnail(); ?>
+                                                <div class="col-md-4">
+                                                    <div class="serv-outer  adj-col">
+                                                        <a class="link-to-page" href="<?php echo esc_url( get_permalink( get_page_by_title( 'Services' ) ) ); ?>">
+                                                            <div class="tp-img-outer">
+                                                                <?php the_post_thumbnail(); ?>
+                                                            </div>
+                                                            <h3><?PHP the_title(); ?></h3>
+                                                            <div class="excerpt"><?PHP the_excerpt(); ?></div>
+                                                        </a>
                                                     </div>
-                                                    <h3><?PHP the_title(); ?></h3>
-                                                    <div class="excerpt"><?PHP the_excerpt(); ?></div>
                                                 </div>
-                                            </div>
                         <?php
                             }
 
@@ -553,6 +558,15 @@ function armanage_custom_taxonomy() {
         array(
             'label' => __( 'Type' ),
             'rewrite' => array( 'slug' => 'blog_type' ),
+            'hierarchical' => true,
+        )
+    );
+    register_taxonomy(
+        'post_placement',
+        'post',
+        array(
+            'label' => __( 'Placement' ),
+            'rewrite' => array( 'slug' => 'post_placement' ),
             'hierarchical' => true,
         )
     );
@@ -671,13 +685,31 @@ function incNumber() {
 
 
 
+/**
+ * 19. Get youtube video title
+ */
+function armanage_getYoutubeInfo($vid_url) {
 
+    $api_key = 'AIzaSyAM6qBIGfTLBJRfXY05hh8uon4r-s3owEo';
 
+        foreach($vid_url as $vid_url) {
 
+            $tmp = explode('/', $vid_url);
+            $param = end($tmp);
+            
+            $api_url = 'https://www.googleapis.com/youtube/v3/videos?id='.$param.'&key='.$api_key.'&part=snippet';
 
+            $data = json_decode(file_get_contents($api_url));
 
+            if(strlen($param)>0){
+                $thumbImg = '<img src="'.$data->items[0]->snippet->thumbnails->medium->url.'" width="150" />';
 
+            }
+            echo '<div class="vid-item thumbnail item" data-value="'.$vid_url.'">';
+            echo $thumbImg;
+            echo '<h5>'.$data->items[0]->snippet->title.'</h5>';
+            echo '</div>';
+        } 
 
-
-
+}
 ?>

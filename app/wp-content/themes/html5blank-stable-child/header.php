@@ -42,6 +42,9 @@
 						<nav class="nav">
 							<?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
 						</nav>
+						<div class="skype-link">
+							<a href="skype:bookmakerfuture?chat"><i class="fa fa-skype"></i>Chat</a>
+						</div>
 					</section>
 					<!-- /Main navigation -->
 

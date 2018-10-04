@@ -44,8 +44,9 @@ body.home {
             top: 50%;
             transform: translateY(-50%);
             nav {
+                transform: translateX(-50px);
                 ul#menu-top {
-                    margin: 0;
+                    margin: 0 40px 0 0;
                     padding: 0;
                     li {
                         display: inline-block;
@@ -53,10 +54,27 @@ body.home {
                         a {
                             padding: 5px;
                             color: #fff;
+                            text-decoration: none;
                         }
                     }
                 }
             }
+            .skype-link {
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    i {
+                        font-size: 30px;
+                        position: absolute;
+                        transform: translate(-30px , -3px);
+                    }
+                }
+            }
         }
+
     }
 }

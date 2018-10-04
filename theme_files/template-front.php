@@ -26,6 +26,7 @@
 	</section>
 
 		<section id="numbers-outer" class="section-slider row adj-col-outer">
+		<h2 class="title">Why choose us?</h2>
 		<div class="container">
 			<div id="numbers" class="owl-carousel">
 				<?php 

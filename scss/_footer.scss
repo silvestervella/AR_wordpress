@@ -2,6 +2,7 @@ footer.section {
     background: $primary-color;
     color: #fff;
     padding: 30px 0 0 0;
+    position: relative;
     .footer-left {
         a {
             display: block;
@@ -17,7 +18,7 @@ footer.section {
                 a {
                     color: #fff;
                     &:hover {
-                        color: #333;
+                        color: $grey;
                     }
                 }
                 i {
@@ -40,7 +41,7 @@ footer.section {
                 a {
                     color: #fff;
                     &:hover {
-                        color: #333;
+                        color: $grey;
                     }
                 }
             }
@@ -49,9 +50,10 @@ footer.section {
             color: #fff;
         }
     }
-    #copyrights-skype {
-        background: #333;
+    #copyrights {
+        background: $grey;
         padding: 30px 0;
+        font-size: 13px;
     }
     .form {
         form {
