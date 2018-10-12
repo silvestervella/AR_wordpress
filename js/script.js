@@ -59,6 +59,7 @@ jQuery(document).ready(function(){
     var payDiv = jQuery("#pay-gateways"),
     blogDiv = jQuery("#events"),
     aboutPageVids = jQuery("#about-vids"),
+    facebookPosts = jQuery("#fb-outer"),
     numDiv = jQuery("#numbers");
 
     payDiv.owlCarousel({
@@ -127,6 +128,16 @@ jQuery(document).ready(function(){
     autoplayTimeout:3700,
     autoplayHoverPause:true,
     items: 1
+});
+facebookPosts.owlCarousel({
+  loop:true,
+  margin:10,
+  dots: false,
+  responsiveClass:true,
+  autoplay:false,
+  autoplayTimeout:4000,
+  autoplayHoverPause:true,
+  items: 1
 });
     jQuery(".next").click(function(){ owl.trigger('owl.next'); });
     jQuery(".prev").click(function(){ owl.trigger('owl.prev'); });

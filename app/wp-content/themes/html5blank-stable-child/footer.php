@@ -1,5 +1,11 @@
 			<!-- footer -->
 			<footer class="row section">
+				
+				<div id="footer-fb">
+					<div class="container">
+						<?php	require_once __DIR__ . '/facebook.php';	?>
+					</div>
+				</div>
 
 				<div id="footer-top">
 					<div class="container">

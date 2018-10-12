@@ -76,7 +76,9 @@
                     </article>
                     <!-- /article -->
 
-                    <?php endif; ?>
+                    <?php endif; 
+
+                    ?>
 
         </div>
         <!-- /container -->
