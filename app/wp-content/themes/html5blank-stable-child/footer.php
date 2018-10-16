@@ -1,18 +1,11 @@
 			<!-- footer -->
 			<footer class="row section">
-				
-				<div id="footer-fb">
-					<div class="container">
-						<?php	require_once __DIR__ . '/facebook.php';	?>
-					</div>
-				</div>
-
 				<div id="footer-top">
 					<div class="container">
 						<div class="col-md-4 col-sm-12">
 							<div class="footer-left">
 								<a href="<?php echo home_url(); ?>">
-									<img src="<?php armanage_get_logo_url() ?>" alt="logo" />
+									<img src="<?php echo  wp_get_attachment_url( '391'); ?>" alt="logo" />
 								</a>
 								<p>The betting software company was founded with the target of innovating the betting industry, providing the end-customer with an easy, safe and fun gaming experience. At the same time to provide bookmakers with an innovative, safe and extensively customizable management system. To date, we have 10 years experience in the gambling industry, creating a suite of services created by bookmakers for bookmakers.</p>
 							</div>
@@ -50,16 +43,7 @@
 
 
 						<div class="col-md-4 col-sm-12 form">
-						<!--
-									<form action="mail.php" method="post">
-										Name: <input type="text" name="name" placeholder="First name.." style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"><br>
-										Last name: <input type="text" name="lastname" placeholder="Last name.."><br>
-										E-mail: <input type="text" name="email" placeholder="Email address.."><br>
-										Number: <input type="text" name="phone" placeholder="Phone number.."><br>
-										Message: <textarea name="messaggio" placeholder="Enter text here..."></textarea>
-										<input type="submit" class="form-submit" value="Send">
-									</form>
-						-->
+							<?php echo do_shortcode( '[contact-form-7 id="257" title="Contact form 1"]' ); ?>
 						</div>
 
 					</div>
@@ -68,21 +52,9 @@
 				<div id="footer-menu">
 					<div class="container">
 						<div class="col-md-12">
-							<ul>
-								<li class="active">
-									<a href="http://www.armanagement.net"><span>Home</span></a>
-								</li>
-								<li>
-									<a href="blog.html"><span>Blog</span></a>
-								</li>
-								<li>
-									<a href="services.html"><span>Services</span></a>
-								</li>
-								<li><a href="products.html"><span>Products</span></a></li>
-								<li><a href="http://timerbet.com" target="_blank"><span>Demo</span></a></li>
-								<li><a href="aboutus.html"><span>About Us</span></a></li>
-								<li><a class="contact-button" href="#"><span>Contact</span></a></li>
-							</ul>
+							<nav class="nav">
+								<?php wp_nav_menu( array( 'theme_location' => 'extra-menu' ) ); ?>
+							</nav>
 							<a href="#top" class="foot-up"><span>up <i class="fa fa-caret-up" aria-hidden="true"></i></span></a>
 						</div>
 					</div>

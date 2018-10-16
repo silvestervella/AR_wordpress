@@ -134,7 +134,7 @@ facebookPosts.owlCarousel({
   margin:10,
   dots: false,
   responsiveClass:true,
-  autoplay:false,
+  autoplay:true,
   autoplayTimeout:4000,
   autoplayHoverPause:true,
   items: 1

@@ -10,8 +10,8 @@
 		<div id="slogan-sec">
 			<div class="container">
 				<div id="slogan">
-					<p>ONLINE AND RETAIL SOLUTIONS<br />FOR BOOKMAKER BUSINESS</p>
-					<span>CERTIFIED BY</span>
+					<h1>ONLINE AND RETAIL SOLUTIONS<br />FOR BOOKMAKER BUSINESS</h1>
+					<h3>CERTIFIED BY</h3>
 					<img src="http://localhost/ARsite/app/wp-content/uploads/2018/07/quinel.png" alt="quinel logo" />
 				</div>
 				<div id="slider-map">
@@ -47,7 +47,7 @@
 	</section>
 
 		<section id="events-outer" class="section-slider row" style="background-image: url(<?php echo armanage_get_post_page_thumb_url(208); ?>)">
-		<h2 class="title">News</h2>
+		<h2 class="title">Events</h2>
 			<div class="container">
 				<div id="events" class="owl-carousel " >
 					<?php 
@@ -66,17 +66,18 @@
 				</div>
 			</div>
 			<div class="sec-read-more container">
-				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'News' ) ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+				<a href="<?php echo esc_url( get_page_link( 208 ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 			</div>
 	</section>
 
 	<section id="products" class="row section" style="background-image: url(<?php echo armanage_get_post_page_thumb_url(191); ?>)">
 			<h2 class="title">Products</h2>
+			<h3>PREMIUM BETTING SOFTWARE FOR BOOKMAKERS</h3>
 			<div class="container">
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#1">White Label Betting Software</a></li>
-					<li><a data-toggle="tab" href="#2"> Live Betting Grid</a></li>
-					<li><a data-toggle="tab" href="#3">Mobile Betting</a></li>
+					<li class="active"><h4><a data-toggle="tab" href="#1">White Label Betting Software</a></h4></li>
+					<li><h4><a data-toggle="tab" href="#2"> Live Betting Grid</a></h4></li>
+					<li><h4><a data-toggle="tab" href="#3">Mobile Betting</a></h4></li>
 				</ul>
 				<div class="tab-content">    
 				<?php 
@@ -94,7 +95,7 @@
 					?>
 				</div>
 				<div class="sec-read-more container">
-					<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Products' ) ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+					<a href="<?php echo esc_url(  get_page_link( 191 ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 				</div>
 			</div>
 	</section>
@@ -117,7 +118,7 @@
 				?>
 			</div>
 			<div class="sec-read-more container">
-				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Third Party Products' ) ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+				<a href="<?php echo esc_url( get_page_link( 203 ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 			</div>
 	</section>
 
@@ -160,8 +161,15 @@
 				?>
 			</div>
 			<div class="sec-read-more container">
-				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Services' ) ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+				<a href="<?php echo esc_url(get_page_link( 194 ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 			</div>
+	</section>
+	
+	<section id="facebook" class="row section">
+		<h2 class="title">Find us on facebook</h2>
+		<div class="container">
+			<?php	require_once __DIR__ . '/facebook.php';	?>
+		</div>
 	</section>
 	
 <?php get_footer(); ?>

@@ -20,6 +20,9 @@
  * 17. Products + services template post generator
  * 18. Increment number
  * 19. Get youtube video title
+ * 20. Post to facebook
+ * 21. Utf contect decode
+ * 22. Admin restrictions
  */
 
 
@@ -248,6 +251,7 @@ add_filter('get_the_excerpt', 'armanage_custom_wp_trim_excerpt');
  * 7. Add custom css to admin area
  */
 add_action( 'admin_enqueue_scripts', 'armanage_custom_admin_css' );
+add_action( 'login_enqueue_scripts', 'armanage_custom_admin_css' );
 function armanage_custom_admin_css() {
 	wp_enqueue_style( 'custom_wp_admin_css', get_stylesheet_directory_uri() . '/css/admin-style.css', false, '1.0.0' );
 }
@@ -325,46 +329,90 @@ function armanage_post_types() {
     array(
       'labels' => array(
         'name' => __( 'Numbers' ),
-        'singular_name' => __( 'Numbers' )
+        'singular_name' => __( 'Numbers' ),
       ),
       'public' => true,
       'has_archive' => true,
       'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
+      'capability_type' => 'post',
+      'capabilities' => array(
+          'edit_post'          => 'manage_options',
+          'read_post'          => 'manage_options',
+          'delete_post'        => 'manage_options',
+          'edit_posts'         => 'manage_options',
+          'edit_others_posts'  => 'manage_options',
+          'delete_posts'       => 'manage_options',
+          'publish_posts'      => 'manage_options',
+          'read_private_posts' => 'manage_options'
+      ),
     )
   );
   register_post_type( 'products',
   array(
     'labels' => array(
       'name' => __( 'Products' ),
-      'singular_name' => __( 'Products' )
+      'singular_name' => __( 'Products' ),
     ),
     'public' => true,
     'has_archive' => true,
     'taxonomies'  => array( 'product_type' ),
     'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
+    'capability_type' => 'post',
+    'capabilities' => array(
+        'edit_post'          => 'manage_options',
+        'read_post'          => 'manage_options',
+        'delete_post'        => 'manage_options',
+        'edit_posts'         => 'manage_options',
+        'edit_others_posts'  => 'manage_options',
+        'delete_posts'       => 'manage_options',
+        'publish_posts'      => 'manage_options',
+        'read_private_posts' => 'manage_options'
+    ),
   )
 );
 register_post_type( 'services',
 array(
   'labels' => array(
     'name' => __( 'Services' ),
-    'singular_name' => __( 'Services' )
+    'singular_name' => __( 'Services' ),
   ),
   'public' => true,
   'has_archive' => true,
   'taxonomies'  => array( 'services_placement' ),
   'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
+  'capability_type' => 'post',
+  'capabilities' => array(
+      'edit_post'          => 'manage_options',
+      'read_post'          => 'manage_options',
+      'delete_post'        => 'manage_options',
+      'edit_posts'         => 'manage_options',
+      'edit_others_posts'  => 'manage_options',
+      'delete_posts'       => 'manage_options',
+      'publish_posts'      => 'manage_options',
+      'read_private_posts' => 'manage_options'
+  ),
 )
 );
 register_post_type( 'payments',
 array(
   'labels' => array(
     'name' => __( 'Payment Gateways' ),
-    'singular_name' => __( 'Gateways' )
+    'singular_name' => __( 'Gateways' ),
   ),
   'public' => true,
   'has_archive' => true,
   'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
+  'capability_type' => 'post',
+  'capabilities' => array(
+      'edit_post'          => 'manage_options',
+      'read_post'          => 'manage_options',
+      'delete_post'        => 'manage_options',
+      'edit_posts'         => 'manage_options',
+      'edit_others_posts'  => 'manage_options',
+      'delete_posts'       => 'manage_options',
+      'publish_posts'      => 'manage_options',
+      'read_private_posts' => 'manage_options'
+  ),
 )
 );
   }
@@ -428,7 +476,7 @@ function armanage_front_page_posts($atts , $class) {
                                 <?php }; ?>
 
                                 <div class="excerpt-title">
-                                <?php the_title(); ?>
+                                    <h5><?php the_title(); ?></h5>
                                 </div>
                                 
                                 <div class="excerpt-text">
@@ -444,7 +492,7 @@ function armanage_front_page_posts($atts , $class) {
                     ?>
                         <div id="<?php incNumber(); ?>" class="tab-pane fade">
                             <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> row">
-                                        <h3><?php the_title(); ?></h3>
+                                        <h4><?php the_title(); ?></h4>
                                         <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail(); ?></div>
                                         <div class="col-md-5 col-sm-12 excerpt">
                                             <?php the_excerpt(); ?>
@@ -460,11 +508,11 @@ function armanage_front_page_posts($atts , $class) {
                                 <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?>">
                                         <div class="col-md-6">
                                                 <div class="tp-prod-outer adj-col">
-                                                    <a class="link-to-page" href="<?php echo esc_url( get_permalink( get_page_by_title( 'Third Party Products' ) ) ); ?>">
+                                                    <a class="link-to-page" href="<?php echo esc_url(get_page_link( 203 ) ); ?>">
                                                         <div class="tp-img-outer">
                                                             <?php the_post_thumbnail(); ?>
                                                         </div>
-                                                        <h3><?php the_title(); ?></h3>
+                                                        <h4><?php the_title(); ?></h4>
                                                         <div class="excerpt">
                                                             <?php the_excerpt(); ?>
                                                         </div>
@@ -480,11 +528,11 @@ function armanage_front_page_posts($atts , $class) {
                         ?>
                                                 <div class="col-md-4">
                                                     <div class="serv-outer  adj-col">
-                                                        <a class="link-to-page" href="<?php echo esc_url( get_permalink( get_page_by_title( 'Services' ) ) ); ?>">
+                                                        <a class="link-to-page" href="<?php echo esc_url(  get_page_link( 194 ) ); ?>">
                                                             <div class="tp-img-outer">
                                                                 <?php the_post_thumbnail(); ?>
                                                             </div>
-                                                            <h3><?PHP the_title(); ?></h3>
+                                                            <h4><?PHP the_title(); ?></h4>
                                                             <div class="excerpt"><?PHP the_excerpt(); ?></div>
                                                         </a>
                                                     </div>
@@ -711,5 +759,124 @@ function armanage_getYoutubeInfo($vid_url) {
             echo '</div>';
         } 
 
+}
+
+
+
+
+/**
+ * 20. Post to facebook
+ */
+add_action('auto-draft_to_publish', 'armanage_facebook_autopost', 10, 1);
+add_action('draft_to_publish', 'armanage_facebook_autopost', 10, 1);
+add_action('future_to_publish', 'armanage_facebook_autopost', 10, 1);
+add_action('new_to_publish', 'armanage_facebook_autopost', 10, 1);
+add_action('pending_to_publish', 'armanage_facebook_autopost', 10, 1);
+
+function armanage_facebook_autopost() {
+require __DIR__ . '/includes/facebook/src/Facebook/autoload.php';
+    // Get ID of the published post:
+    $post_id = get_the_ID();
+
+    // Check to see if this has already been Tweeted
+    $posted = get_post_meta($post_id, 'social_twitter_posted', true);
+    $post_type = get_post_type();
+
+    $terms = get_terms( array( 
+        'taxonomy' => 'blog_type'
+    ) );
+
+    if (($posted != 'true') && ($post_type == 'blog') &&  (has_term( 'facebook', 'blog_type' )) )  {
+
+        $appId = '333817067380493';
+        $appSecret = '40aa30c097211288d0bdc7af91c67c38';
+        $pageId = '564993593940832';
+        $userAccessToken = 'EAAEvmte4nw0BAKUnpjMlJxFRByaxO1qIjCvypP96zl61P8pnwxytjpNfn5cNPfBMpBepVdAEsG25ZAz7bpsei3yPeas3rTouvfZCx0iZBwpTZBsWBmWaZAUD0R7H2YohCZARxxvohEKbOeiVZBP30JDkFDO9FZCcp6wz161Mvup8P3efxMtkEGZB5oylVuPSmCRSi7YJKWYRBcwZDZD';
+
+        $fb = new Facebook\Facebook([
+            'app_id' => $appId,
+            'app_secret' => $appSecret,
+            'default_graph_version' => 'v3.1'
+        ]);
+        
+        $longLivedToken = $fb->getOAuth2Client()->getLongLivedAccessToken($userAccessToken);
+
+        $fb->setDefaultAccessToken($longLivedToken);
+        
+        $response = $fb->sendRequest('GET', $pageId, ['fields' => 'access_token'])
+            ->getDecodedBody();
+        
+        $foreverPageAccessToken = $response['access_token'];
+
+
+            // Get data from the published post:
+            $post_title = get_the_title($post_id);
+            $post_image = get_the_post_thumbnail_url($post_id);
+            $post_content = get_post($post_id);
+            $post_content = $post_content->post_content;
+            $post_link = the_permalink();
+            $content = utf8_decode($post_content);
+              
+              try {
+                // Returns a `Facebook\FacebookResponse` object
+                $fb->setDefaultAccessToken($foreverPageAccessToken);
+                $fb->sendRequest('POST', "$pageId/feed", [
+                    'message' => $post_content,
+                    'link' => $post_link,
+                ]);
+
+
+              } catch(Facebook\Exceptions\FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+              } catch(Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+              }
+
+    }
+}
+
+
+
+
+/**
+ * 21. Utf contect decode
+ */
+function decode_content($content) {
+
+    $content = utf8_decode($content);
+
+    return $content;
+}
+
+
+
+
+
+
+/**
+ * 22. Admin restrictions
+ */
+add_action( 'admin_menu', 'armanage_remove_admin_menus', 999 );
+function armanage_remove_admin_menus() {
+
+    $user = wp_get_current_user();
+    if ( in_array( 'editor', (array) $user->roles ) ) {
+
+        remove_menu_page( 'upload.php' );
+        remove_menu_page( 'edit.php' );
+        remove_menu_page( 'tools.php' );
+        remove_menu_page( 'edit-comments.php' );
+        remove_menu_page( 'edit.php?post_type=page' );
+        remove_menu_page( 'edit.php?post_type=numbers' );
+        remove_menu_page( 'edit.php?post_type=products' );
+        remove_menu_page( 'edit.php?post_type=services' );
+        remove_menu_page( 'edit.php?post_type=payments' );
+        remove_menu_page( 'edit.php?post_type=html5-blank' );
+        remove_menu_page( 'wpcf7' );
+        remove_menu_page( 'upload.php' );
+
+    }
 }
 ?>

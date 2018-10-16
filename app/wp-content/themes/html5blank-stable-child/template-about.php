@@ -5,7 +5,7 @@
 
  get_header(); ?>
 
-<main role="main"  style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full'); ?>)">
+<main role="main">
     <div class="posts-sec-outer">
         <div class="container">        
         <?php if (have_posts()): while (have_posts()) : the_post(); 
@@ -51,14 +51,21 @@
 
                 </div>
                 <!-- /row -->
+           </div>
+           <!-- /container -->
 
-                <div class="row map">
-                    <div class="col-md-6 left">
-                        <h5>Visit Us!</h5>
+                <div class="map" style="background-image: url(<?php echo wp_get_attachment_url(403); ?>)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 left">
+                                <h5>Visit Us!</h5>
+                            </div>
+                            <div class="col-md-6 right">
+                                <iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ2b1FoDxFDhMReTkScHZV2fg&key=AIzaSyAM6qBIGfTLBJRfXY05hh8uon4r-s3owEo" allowfullscreen></iframe>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6 right">
-                        <iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ2b1FoDxFDhMReTkScHZV2fg&key=AIzaSyAM6qBIGfTLBJRfXY05hh8uon4r-s3owEo" allowfullscreen></iframe>
-                    </div>
+                    <!-- /container -->
                 </div>
                 <!-- /row -->
                 
@@ -79,9 +86,6 @@
                     <?php endif; 
 
                     ?>
-
-        </div>
-        <!-- /container -->
     </div>
     <!-- /posts-sec-outer -->
 </main>

@@ -1,101 +1,18 @@
 footer.section {
-    background: #E9EBEE;
+    padding: 0;
+    position: relative;
     #footer-top {
         background: $primary-color;
         color: #fff;
-    }
-    padding: 30px 0 0 0;
-    position: relative;
-    #footer-fb {
-        min-height: 380px;
-        padding-bottom: 30px;
-        #page-info {
-            background: #fff;
-            border-radius: 4px 4px 0 0;
-            padding: 15px 15px 0 15px;
-            border: 1px solid #dddfe2;
-            border-bottom: none;
-            font-size: 20px;
-            color: #365899;
-            font-weight: 600;
-            #page-name {
-                float: left;
-            }
-            iframe {
-                float: left;
-                margin: 5px 0 0 30px;
-            }
-        }
-        #fb-outer {
-            background: #fff;
-            border: 1px solid #dddfe2;
-            border-top: none;
-            border-radius: 0 0 4px 4px;
-            padding: 15px;
-            .owl-item {
-                height: 380px;
-                border: 1px solid #e1e2e3;
-                [class*="col-"] {
-                    padding: 0;
-                } 
-                .fb-post-outer {
-                    .fb-info-msg {
-                        padding-top: 30px;
-                        .fb-post-info {
-                            border-right: 1px solid #e1e2e3;
-                            padding: 0 30px 30px 30px;
-                            .info-outer {
-                                text-align: center;
-                                margin-bottom: 20px;
-                                img {
-                                    width: 100px;
-                                    height: 100px;
-                                    border-radius: 50%;
-                                    position: relative;
-                                    left: 50%;
-                                    transform: translateX(-50%);
-                                }
-                                &.name {
-                                    color: #365899;
-                                    font-weight: 600;
-                                }
-                                &.date {
-                                    color: #616770;
-                                }
-                            }
-                        }
-                        .fb-post-msg {
-                            color: #1d2129;
-                            padding: 0 30px 30px 30px;
-                        }
-                    }
-                    .fb-post-attac {
-                        .post-attac {
-                            position: absolute;
-                            height: 310px;
-                            top: 0;
-                            background: #fff;
-                            width: 100%;
-                            margin-left: -15px;
-                            padding: 30px 15px;
-                            img {
-                                max-height: 100%;
-                                max-width: 100%;
-                                width: auto;
-                                position: relative;
-                                left: 50%;
-                                transform: translateX(-50%);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        padding: 30px 0;
     }
     .footer-left {
         a {
             display: block;
             margin-bottom: 30px;
+            img {
+                max-width: 200px;
+            }
         }
     }
     .foot-contact {
@@ -120,49 +37,58 @@ footer.section {
     #footer-menu {
         background: $primary-color-two;
         padding: 30px 0;
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            li {
-                float: left;
-                margin-right: 20px;
-                a {
-                    color: #fff;
+        nav {
+            display: block;
+            float: left;
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                li {
+                    float: left;
+                    margin-right: 20px;
+                    padding: 10px 5px;
+                    border-bottom: 1px solid transparent; 
                     &:hover {
-                        color: $grey;
+                        border-bottom: 1px solid #fff; 
+                    }
+                    a {
+                        color: #fff;
+                        &:hover {
+                            color: #fff;
+                            text-decoration: none;
+                        }
                     }
                 }
             }
         }
         .foot-up {
             color: #fff;
+            display: block;
+            float: left;
+            margin-top: 7px;
         }
     }
     #copyrights {
         background: $grey;
         padding: 30px 0;
         font-size: 13px;
+        color: #fff;
     }
     .form {
         form {
-            input {
-                background: rgba(255,255,255,0.2);
-                border: none;
-                border-radius: 7px;
-                width: 100%;
-                margin-bottom: 10px;
-                &:last-of-type {
-                    max-width: 100px;
-                    border: 1px solid #fff;
-                }
+            color: #fff;
+            input , textarea {
+                background: rgba(255,255,255,0.1);
+                border: 0;
+                padding: 5px;
+                margin-top: 5px;
+                font-size: 14px;
+                font-weight: 300;
             }
-            textarea {
-                background: rgba(255,255,255,0.2);
-                border: none;
-                border-radius: 7px;
-                width: 100%;
-                margin-bottom: 20px;
+            input[type=submit] {
+                padding: 10px;
+                min-width: 70px;
             }
         }
     }
