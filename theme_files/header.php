@@ -30,17 +30,26 @@
 			<!-- header -->
 			<header id="header">
 				<div class="container">
-					<div id="logo">
-						<!-- logo -->
-						<a href="<?php echo home_url(); ?>">
-							<img src="<?php armanage_get_logo_url() ?>" alt="logo" />
-						</a>
-					</div>
+
+
+
 
 					<!-- Main navigation outer -->
 					<section id="main-nav-outer" class="">
-						<nav class="nav">
+						<nav class="nav navbar navbar-default">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+												<!-- logo -->
+												<a id="logo" class="navbar-brand" href="<?php echo home_url(); ?>">
+							<img src="<?php armanage_get_logo_url() ?>" alt="logo" />
+						</a>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
+						</div>
 						</nav>
 						<div class="skype-link">
 							<a href="skype:bookmakerfuture?chat"><i class="fa fa-skype"></i>CHAT</a>

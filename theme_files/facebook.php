@@ -8,7 +8,7 @@ $fb = new Facebook\Facebook([
     'default_graph_version' => 'v3.1'
     ]);
 
-    $access_token =  'EAAEvmte4nw0BAKUnpjMlJxFRByaxO1qIjCvypP96zl61P8pnwxytjpNfn5cNPfBMpBepVdAEsG25ZAz7bpsei3yPeas3rTouvfZCx0iZBwpTZBsWBmWaZAUD0R7H2YohCZARxxvohEKbOeiVZBP30JDkFDO9FZCcp6wz161Mvup8P3efxMtkEGZB5oylVuPSmCRSi7YJKWYRBcwZDZD';
+    $access_token =  'EAAEvmte4nw0BAJu3sG372toXhpRKMJ5eioKEPWjpOT1eKk9kbiF8SOkSK8IEfsMLEF6QvZAZBdOtMchGkFQbsDipmchwD9wWX2i1TQHKb4cK2uHE2bCdXNt5Sn4SklnUZCnLpo0qAQ57i4DIxPpkxiK0QnnEcDY55lgGZAS1nh5yOWFnk6I64vVK6zlG6nLeYgNz4YZBBPQZDZD';
 
 
     try {
@@ -50,25 +50,33 @@ foreach ( $json['feed'] as $key)
 
   echo '</div>';
 
-  echo '<div class="fb-post-attac col-md-4">';
+  
+  
   if (isset($key['attachments'])) {
+    echo '<div class="fb-post-attac col-md-4">';
     if (isset($key['attachments']['0']['subattachments'])) {
+
+      $count = 0;
 
       foreach ($key['attachments']['0']['subattachments'] as $src) {
         echo '<div class="post-attac"><img src="'.$src['media']['image']['src'].'" alt="post image" /></div>';
+        $count++;
+        if($count==4) {
+          echo '<div>More..</div>';
+          break;
+        }; 
       } 
 
     } else {
 
       foreach ($key['attachments'] as $src) {
         echo '<div class="post-attac"><img src="'.$src['media']['image']['src'].'" alt="post image" /></div>';
-        echo 'haqalla';
       }
-
     }
-
+    echo '</div>';
   }
-  echo '</div>';
+  
+ 
   echo '</div>'; 
 }
 echo '</div>'; 

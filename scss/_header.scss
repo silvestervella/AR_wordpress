@@ -29,25 +29,32 @@ body.home {
         #logo {
             float: left;
             position: relative;
-            top: 50%;
-            transform: translateY(-50%);
             max-width: 250px;
-            width: 100%;
+            -webkit-transition: all 1s;
             transition: all 1s;
-            a {
+            height: auto;
+            img {
                 width: 100%;
             }
         }
         #main-nav-outer {
-            float: right;
             position: relative;
             top: 50%;
             transform: translateY(-50%);
             nav {
                 transform: translateX(-50px);
+                background: unset;
+                margin: 0;
+                border: 0;
+                min-height: unset;
                 ul#menu-top {
                     margin: 0 40px 0 0;
                     padding: 0;
+                    top: 50%;
+                    position: absolute;
+                    display: block;
+                    right: 0;
+                    transform: translateY(-50%);
                     li {
                         display: inline-block;
                         padding: 0 10px;

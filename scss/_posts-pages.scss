@@ -33,9 +33,6 @@
             position: relative;
             border-radius: 50px;
             margin: 150px 0;
-            &:first-child {
-                margin: 0 0 150px 0;
-            }
             .cpt-background {
                 background-repeat: no-repeat;
                 background-size: cover;
@@ -85,7 +82,7 @@
                 text-align: center;
                 img {
                     margin-bottom: 30px;
-                    max-width: 400px;
+                    max-width: 100%;
                 }
             }
             &.active {
@@ -113,6 +110,9 @@ body.page-template-template-products {
             min-height: 200px;
             overflow: hidden;
             border-radius: 0 60px;
+            .tp-mob-link {
+                display: none;
+            }
             &:hover {
                 #tp-overlay {
                     transform: skew(-35deg) translateX(120%);
@@ -176,6 +176,44 @@ body.page-template-template-products {
                 }
             }
         }
+        #accordion {
+            .panel-heading {
+                padding: 0;
+                border: 0;
+                background: $grey;
+                border-radius: 0;
+                .panel-title {
+                    a {
+                        padding: 15px;
+                        width: 100%;
+                        display: inline-block;
+                        text-decoration: none;
+                        line-height: 16px;
+                        color: #fff;
+                        span {
+                            float: right;
+                        }
+                    }
+                }
+            }
+            .panel {
+                border: 0;
+                border-radius: 0;
+            }
+            h3 {
+                padding: 0;
+            }
+            h4 {
+                color: $grey;
+            }
+            .featured-img {
+                text-align: center;
+                img {
+                    height: 300px;
+                    margin: 0 auto;
+                }
+            }
+        }
     }
 }
 
@@ -229,12 +267,11 @@ body.page-template-template-about {
                 width: 40px;
                 padding: 5px;
                 margin-right: 2px;
-                border: 1px solid $grey;
-                border-radius: 10px;
                 text-align: center;
                 span {
                     position: relative;
                     color: $grey;
+                    font-size: 50px;
                 }
             }
         }

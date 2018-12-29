@@ -37,8 +37,12 @@ $grey: #333;
 /* 3. General */
 * {
   font-family: 'Titillium Web', sans-serif;
+  &:focus {
+    outline: none;
+}
 }
 html {
+  scroll-behavior: smooth;
   body {
       font-size: 16px;
       main {
@@ -71,7 +75,6 @@ h2.title {
 a {
   color: #1875D1;
 }
-
 
 
 /* 4. Functions */

@@ -9,7 +9,7 @@ $login-box-color: rgb(255,255,255);
 $table-back-color: rgb(255,255,255);
 $table-back-color-alpha: 0.25;
 
-$bg-logo: url('../../../uploads/2018/07/logo.png');
+$bg-logo: url('../../../uploads/2018/10/emblemtransp.png');
 
 
 
@@ -29,7 +29,7 @@ body.login.login-action-login {
     h1 a {
         background-image: $bg-logo;
         background-size: 100%;
-        width: 300px;
+        width: 120px;
     }
     form {
         background: rgba($table-back-color , $table-back-color-alpha);
@@ -61,6 +61,7 @@ body.login.login-action-login {
     background-attachment: fixed;
     background-position: center;
 }
+
 
 
 
@@ -119,6 +120,20 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu>li.current>a.current:a
 #collapse-button , #collapse-button:focus, #collapse-button:hover {
     color: $text-one;
 }
+#wpadminbar:not(.mobile) .ab-top-menu>#wp-admin-bar-wp-logo:hover>.ab-item {
+    background: unset;
+}
+#wpadminbar #wp-admin-bar-wp-logo >.ab-item .ab-icon:before {
+    content: '';
+    background-image: url(../../../uploads/2018/10/emblemWhite-icon.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+}
+
 
 
 

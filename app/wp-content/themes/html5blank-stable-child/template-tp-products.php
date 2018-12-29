@@ -26,6 +26,9 @@
                         'order'=>'ASC',
                         'meta_key'=>'_custom_post_order',
                         'product_type'=>'third-party-products',
+                        'blog_type'=>'',
+                        'posts_per_page'=>'',
+                        'nopaging'=>'true'
                     )); ?>
 
             </div>

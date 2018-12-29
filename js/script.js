@@ -7,6 +7,7 @@
    * 7. CPT increment ID + add active class
    * 8. Add active class to home products tabs
    * 9. Home parallex background effect
+   * 10. Facebook posts images resize
    * 
    * 
    * window.load
@@ -75,7 +76,7 @@ jQuery(document).ready(function(){
                 items:1,
                 nav:false
             },
-            600:{
+            992:{
                 items:5,
                 nav:true
             }
@@ -94,7 +95,7 @@ jQuery(document).ready(function(){
               items:1,
               nav:false
           },
-          600:{
+          992:{
               items:2,
               nav:true
           }
@@ -113,7 +114,7 @@ jQuery(document).ready(function(){
               items:1,
               nav:false
           },
-          600:{
+          992:{
               items:3,
               nav:true
           }
@@ -127,7 +128,7 @@ jQuery(document).ready(function(){
     autoplay:true,
     autoplayTimeout:3700,
     autoplayHoverPause:true,
-    items: 1
+    items: 1,
 });
 facebookPosts.owlCarousel({
   loop:true,
@@ -137,7 +138,7 @@ facebookPosts.owlCarousel({
   autoplay:true,
   autoplayTimeout:4000,
   autoplayHoverPause:true,
-  items: 1
+  items: 1,
 });
     jQuery(".next").click(function(){ owl.trigger('owl.next'); });
     jQuery(".prev").click(function(){ owl.trigger('owl.prev'); });
@@ -153,7 +154,7 @@ facebookPosts.owlCarousel({
 
 /**
  * 7. CPT increment ID + add active class
- */
+ 
 
 if (jQuery('.cpt-outer').length) {
   var i = 0,
@@ -166,15 +167,14 @@ if (jQuery('.cpt-outer').length) {
       jQuery(this).val(i);
   });
   cptOuter.first().addClass('active');
-
 }
-
+*/
 
 
 /**
  * 8. Add active class to home products tabs
  */
-jQuery('#products').find('.tab-pane.fade').first().addClass('active in');
+jQuery('#products').find('.panel-collapse.collapse').first().addClass('in');
 
 
 
@@ -188,12 +188,34 @@ function homeParallexEffect() {
           scrollPercent;
   jQuery(window).scroll(function () {
       scrollPercent = 500 * jQuery(window).scrollTop() / (jQuery(document).height() - jQuery(window).height());
-      jQuery('#top').css('background-position' , "0px " + scrollPercent + "%" );
+      jQuery('#top').css('background-position' , "50% " + scrollPercent + "%" );
   });
 }
 if (jQuery('body.home').length) {
   homeParallexEffect();
 }
+
+
+
+
+
+/* 10. Facebook posts images resize */
+jQuery('#fb-outer .owl-item').not('.cloned').find('.fb-post-attac').each(function(){
+
+  var fbAttacCnt = jQuery(this).children('.post-attac').length;
+  if (fbAttacCnt <= 2) {
+    fbAttacCnt = fbAttacCnt;
+  } else {
+    fbAttacCnt = 2;
+  }
+
+    jQuery(this).children('.post-attac').each(function(){
+        jQuery(this).css({
+          "width": 100 / fbAttacCnt + "%"
+        });
+    });  
+})
+
 
 
 // End of document.ready
@@ -223,6 +245,8 @@ jQuery(window).load(function(){
     /**
    * 2. Set equal height to divs
    */
+  function adjColsHeight(x) {
+    if (x.matches) { // If media query matches
   jQuery(".adj-col-outer").each(function(){
     var hiCol = 0;
     jQuery(this).find("div.adj-col").each(function(){
@@ -232,8 +256,12 @@ jQuery(window).load(function(){
         hiCol = h; 
       }  
     });
-    jQuery(this).find('.adj-col').height(hiCol);  
+    jQuery(this).find('.adj-col').css('min-height' , hiCol);  
   });
+    }
+  }
+  var x = window.matchMedia("(min-width: 992px)");
+  adjColsHeight(x);
 
 
 
@@ -261,6 +289,7 @@ if (jQuery('body.page-template-template-about').length) {
 }
 
 
+
 // End of window.load
 });
 
@@ -271,7 +300,9 @@ jQuery(window).on('resize scroll', function() {
   var scroll = jQuery(window).scrollTop();
 
   /* 1. CPT scrolling active divs */
-  jQuery('.cpt-outer').each(function() {
+  function cptActive(x) {
+    if (x.matches) { // If media query matches
+    jQuery('.cpt-outer').each(function() {
       var activeColor = jQuery(this).attr('id');
     if (jQuery(this).isFullyInViewport()) {
       jQuery('#' + activeColor).addClass('active');
@@ -279,6 +310,10 @@ jQuery(window).on('resize scroll', function() {
       jQuery('#' + activeColor).removeClass('active');
     }
   });
+  }
+}
+  var x = window.matchMedia("(min-width: 992px)");
+  cptActive(x);
 
   
   
@@ -291,3 +326,14 @@ jQuery(window).on('resize scroll', function() {
 
 // End of window.resize + scroll 
 });
+
+
+
+
+
+
+
+
+
+
+

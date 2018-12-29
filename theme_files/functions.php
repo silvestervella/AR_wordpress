@@ -23,6 +23,7 @@
  * 20. Post to facebook
  * 21. Utf contect decode
  * 22. Admin restrictions
+ * 23. Lazy load img src
  */
 
 
@@ -73,11 +74,13 @@ function genId($arg1) {
     wp_register_script( 'bootstrap', get_stylesheet_directory_uri() . '/js/bootstrap.min.js', array( 'jquery' ) );
     wp_register_script( 'theme-script', get_stylesheet_directory_uri() . '/js/script.js', array( 'jquery' ) );
     wp_register_script( 'owlcarousel', get_stylesheet_directory_uri() . '/js/owl.carousel.min.js', array( 'jquery' ) );
+    wp_register_script( 'armanage-lazyload', get_stylesheet_directory_uri() . '/js/armanage-lazyload.js', array('jquery'), '', true);
     
     // Enqueue Child Scripts
     wp_enqueue_script( 'bootstrap' ); 
     wp_enqueue_script( 'theme-script' );   
-    wp_enqueue_script( 'owlcarousel' );   
+    wp_enqueue_script( 'owlcarousel' );
+    wp_enqueue_script( 'armanage-lazyload');   
 
 }
     add_action('wp_enqueue_scripts', 'armanage_styles_child', 20); // Add Theme Child Stylesheet
@@ -319,8 +322,13 @@ function armanage_post_types() {
           'name' => __( 'Blog' ),
           'singular_name' => __( 'Blog' )
         ),
-        'public' => true,
-        'has_archive' => true,
+        'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
+        'publicly_queryable' => true,  // you should be able to query it
+        'show_ui' => true,  // you should be able to edit it in wp-admin
+        'exclude_from_search' => true,  // you should exclude it from search results
+        'show_in_nav_menus' => false,  // you shouldn't be able to add it to menus
+        'has_archive' => false,  // it shouldn't have archive page
+        'rewrite' => false,  // it shouldn't have rewrite rules
         'taxonomies'  => array( 'blog_placement' ),
         'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
       )
@@ -490,17 +498,30 @@ function armanage_front_page_posts($atts , $class) {
                     // Products Section (Our products)
                     if (in_array("our-products" , $args)) {					
                     ?>
-                        <div id="<?php incNumber(); ?>" class="tab-pane fade">
-                            <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> row">
-                                        <h4><?php the_title(); ?></h4>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#pane<?php incNumber(); ?>">
+            <?php the_title(); ?>
+            <span><i class="fa fa-caret-down"></i></span>
+          </a>
+        </h4>
+      </div>
+      <div id="pane<?php incNumber2(); ?>" class="panel-collapse collapse">
+      <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?> panel-body row">
                                         <div class="col-md-7 col-sm-12 featured-img"><?php the_post_thumbnail(); ?></div>
                                         <div class="col-md-5 col-sm-12 excerpt">
                                             <?php the_excerpt(); ?>
                                         </div>
                             </div>
-                        </div>
+      </div>
+    </div>
+
                     <?php
                     }
+
+
+
 
                     // Products Section (Tp products)
                     if (in_array("third-party-products" , $args)) {					
@@ -508,7 +529,7 @@ function armanage_front_page_posts($atts , $class) {
                                 <div id="<?php echo $post->post_name; ?>" class="<?php echo $class ?>">
                                         <div class="col-md-6">
                                                 <div class="tp-prod-outer adj-col">
-                                                    <a class="link-to-page" href="<?php echo esc_url(get_page_link( 203 ) ); ?>">
+                                                    <a class="link-to-page" href="<?php echo esc_url(get_page_link( 203 )) . "#" . get_the_ID() ?>">
                                                         <div class="tp-img-outer">
                                                             <?php the_post_thumbnail(); ?>
                                                         </div>
@@ -528,7 +549,7 @@ function armanage_front_page_posts($atts , $class) {
                         ?>
                                                 <div class="col-md-4">
                                                     <div class="serv-outer  adj-col">
-                                                        <a class="link-to-page" href="<?php echo esc_url(  get_page_link( 194 ) ); ?>">
+                                                    <a class="link-to-page" href="<?php echo esc_url(get_page_link( 194 )) . "#" . get_the_ID() ?>">
                                                             <div class="tp-img-outer">
                                                                 <?php the_post_thumbnail(); ?>
                                                             </div>
@@ -689,6 +710,9 @@ function armanage_prod_serv_temp_post_gen($atts) {
                         'order' => $atts['order'],
                         'meta_key' => $atts['meta_key'],
                         'product_type' => $atts['product_type'],
+                        'blog_type' => $atts['blog_type'],
+                        'posts_per_page' => $atts['posts_per_page'],
+                        'nopaging'=>  $atts['nopaging']
                         );
 
 
@@ -698,18 +722,18 @@ function armanage_prod_serv_temp_post_gen($atts) {
                         $query1->the_post();
                         global $post; ?>
 
-                                    <div class="row cpt-outer">
+                                    <div class="row cpt-outer" id="<?php echo get_the_ID(); ?>">
                                         <div class="cpt-background"   style="background-image: url(<?php echo esc_url( get_post_meta( get_the_ID(), 'background-image', true ) ); ?>)"></div>
                                         <div class="cpt-inner">
                                             <div class="post-title col-xs-12">
                                                 <h5><?php the_title(); ?></h5>
                                             </div>
 
-                                            <div class="feat-img col-md-6 col-xs-12">
+                                            <div class="feat-img col-md-5 col-xs-12">
                                             <?php the_post_thumbnail( ); ?>
                                             </div>
                                             
-                                            <div class="post-content col-md-6 col-xs-12">
+                                            <div class="post-content col-md-7 col-xs-12">
                                                 <?php the_content(); ?>
                                             </div>
                                         </div>
@@ -725,6 +749,18 @@ function armanage_prod_serv_temp_post_gen($atts) {
  * 18. Increment number
  */
 function incNumber() {
+    static $counter = 0;
+    $counter++;
+
+    echo "$counter";
+}
+function incNumber2() {
+    static $counter = 0;
+    $counter++;
+
+    echo "$counter";
+}
+function incNumber3() {
     static $counter = 0;
     $counter++;
 
@@ -791,7 +827,7 @@ require __DIR__ . '/includes/facebook/src/Facebook/autoload.php';
         $appId = '333817067380493';
         $appSecret = '40aa30c097211288d0bdc7af91c67c38';
         $pageId = '564993593940832';
-        $userAccessToken = 'EAAEvmte4nw0BAKUnpjMlJxFRByaxO1qIjCvypP96zl61P8pnwxytjpNfn5cNPfBMpBepVdAEsG25ZAz7bpsei3yPeas3rTouvfZCx0iZBwpTZBsWBmWaZAUD0R7H2YohCZARxxvohEKbOeiVZBP30JDkFDO9FZCcp6wz161Mvup8P3efxMtkEGZB5oylVuPSmCRSi7YJKWYRBcwZDZD';
+        $userAccessToken = 'EAAEvmte4nw0BAJu3sG372toXhpRKMJ5eioKEPWjpOT1eKk9kbiF8SOkSK8IEfsMLEF6QvZAZBdOtMchGkFQbsDipmchwD9wWX2i1TQHKb4cK2uHE2bCdXNt5Sn4SklnUZCnLpo0qAQ57i4DIxPpkxiK0QnnEcDY55lgGZAS1nh5yOWFnk6I64vVK6zlG6nLeYgNz4YZBBPQZDZD';
 
         $fb = new Facebook\Facebook([
             'app_id' => $appId,
@@ -820,22 +856,36 @@ require __DIR__ . '/includes/facebook/src/Facebook/autoload.php';
               try {
                 // Returns a `Facebook\FacebookResponse` object
                 $fb->setDefaultAccessToken($foreverPageAccessToken);
-                $fb->sendRequest('POST', "$pageId/feed", [
-                    'message' => $post_content,
-                    'link' => $post_link,
-                ]);
+
+                if (has_post_thumbnail()) {
+                    $fb->sendRequest('POST', "$pageId/photos", [
+                        'source' => $fb->fileToUpload($post_image),
+                        'message' => $post_content,
+                        'link' => $post_link,
+                    ]);
+                } else {
+                    $fb->sendRequest('POST', "$pageId/feed", [
+                        'message' => $post_content,
+                        'link' => $post_link,
+                    ]);
+                }
 
 
               } catch(Facebook\Exceptions\FacebookResponseException $e) {
+                echo $post_image ;
                 echo 'Graph returned an error: ' . $e->getMessage();
+               
                 exit;
               } catch(Facebook\Exceptions\FacebookSDKException $e) {
+                echo $post_image ;
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
+   
                 exit;
               }
 
     }
 }
+
 
 
 
@@ -879,4 +929,5 @@ function armanage_remove_admin_menus() {
 
     }
 }
+
 ?>

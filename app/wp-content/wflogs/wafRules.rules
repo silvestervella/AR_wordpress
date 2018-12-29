@@ -17,7 +17,7 @@ blacklistParam(url='/elfinder[\/]+php[\/]+connector\.minimal\.php$/i', param=req
 whitelistParam(url='/.*/', param=request.body['excerpt'])
 whitelistParam(url='/wp-comments-post\.php$/i', param=request.body['comment'], rules=[3, 12])
 whitelistParam(url='/\/wp-admin\/admin-ajax\.php$/i', param=request.body['content'])
-whitelistParam(url='/\/wp-admin\/admin-ajax\.php$/i', param=request.body['data'])
+whitelistParam(url='/\/wp-admin\/admin-ajax\.php$/i', param=request.body['data'], rules=[9], conditional=((notMatch('/^(?:nopriv_)?wpgdprc_process_action$/i', request.body.action) and notMatch('/^(?:nopriv_)?wpgdprc_process_action$/i', request.queryString.action))))
 whitelistParam(url='/\/wp\-load\.php$/i', param=request.body['params']['files'], rules=[9])
 whitelistParam(url='/\/wp-admin\/(?:network\/)?(?:plugin(?:s|-install)|edit)\.php$/i', param=request.queryString['s'])
 whitelistParam(url='/\/wp-admin\/admin-ajax\.php$/i', param=request.body['whitelistedPath'])
@@ -64,6 +64,7 @@ whitelistParam(url='/(?:lint|import)\.php$/i', param=request.body['sql_query'])
 whitelistParam(url='/\/wp-admin\/admin-ajax\.php$/i', param=request.body['divi_integration_body'])
 whitelistParam(url='/\/wp-admin\/admin-ajax\.php$/i', param=request.body['divi_integration_head'])
 whitelistParam(url='/.*/', param=request.body['fl_builder_data']['settings']['html'], rules=[9], conditional=((currentUserIs('administrator', server.empty) or currentUserIs('editor', server.empty))))
+whitelistParam(url='/.*/', param=request.body['partials'], rules=[9], conditional=((currentUserIs('administrator', server.empty))))
 whitelistParam(url='#wp\-admin/+options\-general.php$#i', param=request.body['options']['modules']['ga_code'], rules=[9])
 whitelistParam(url='#importbuddy\.php$#i', param=request.fileNames, rules=[76])
 
@@ -300,12 +301,6 @@ if (equals('fancybox-for-wordpress', request.queryString.page) and match(xssRege
 if ((match('#/delete\-all\-comments/delete\-all\-comments\.php$#i', server.script_filename) or (lengthGreaterThan('0', request.body.restorefromfileNAME) and lengthGreaterThan('0', request.body.restorefromfileURL))) and currentUserIsNot('administrator', server.empty)):
 	block(id=83, category='file_download', description='Delete All Comments <= 2.0.0 - Unauthenticated Remote File Download')
 
-if ((match('#wp-json/wp/v\d+/posts/#i', request.path) or match('#/wp/v\d+/posts/#i', request.queryString.rest_route)) and match('/[^0-9]/', request.queryString.id)):
-	block(id=84, category='auth-bypass', description='WordPress 4.7.0-4.7.1 - Authentication Bypass: Page/Post Content Modification via REST API')
-
-if ((match('#wp-json/wp/v\d+/posts/#i', request.path) or match('#/wp/v\d+/posts/#i', request.queryString.rest_route) or match('#/wp/v\d+/posts/#i', request.body.rest_route)) and (match('/^(post|patch|put)$/i', server.request_method) or match('/^(post|patch|put)$/i', request.headers['X-Http-Method-Override']) or match('/^(post|patch|put)$/i', request.queryString._method)) and currentUserIsNot('administrator', server.empty) and currentUserIsNot('editor', server.empty) and currentUserIsNot('author', server.empty) and currentUserIsNot('contributor', server.empty)):
-	block(id=85, category='auth-bypass', description='WordPress 4.7.0-4.7.1 - Authentication Bypass')
-
 if (match('/iwp_action/i', base64decode(request.rawBody)) and match('/(^|;|{|})O:+?\+*[0-9]+:(?!"stdClass")/i', base64decode(request.rawBody))):
 	block(id=86, category='obji', description='InfiniteWP Client <= 1.6.11 - Unauthenticated Object Injection')
 
@@ -378,6 +373,9 @@ if (equals('the_champ_user_auth', request.queryString.action, request.body.actio
 if (matchCount('/(^|;|{|})O:+?\+*[0-9]+:"WP_Theme"/i', base64decode(request.cookies.wpsp_user_session))):
 	block(id=113, category='obji', score=100, description='WP Support Plus Responsive Ticket System <= 9.0.2 - Object injection')
 
+if ((match('/\/wp\-admin\/admin\-ajax\.php$/i', server.script_filename) and (match('/^(ampforwp_(save_installer|get_licence_activate_update|deactivate_license|enable_modules_upgread))$/i', request.body.action, request.queryString.action) and currentUserIsNot('administrator', server.empty)) or (match('/^((amppb_(color_picker|textEditor|export_layout_data|save_layout_data))|enable_amp_pagebuilder|ampforwp_(get_image|icons_list_format))$/i', request.body.action, request.queryString.action) and currentUserIsNot('administrator', server.empty) and currentUserIsNot('editor', server.empty) and currentUserIsNot('author', server.empty) and currentUserIsNot('contributor', server.empty))) or (notEquals('', request.queryString.use_amp_pagebuilder, request.queryString.ramppb, request.queryString.ampforwp_custom_content_editor, request.queryString.ampforwp_custom_content_editor_checkbox, request.body['ampforwp-amp-on-off'], request.body['ampforwp-ia-on-off'], request.body['ampforwp-redirection-on-off']) and currentUserIsNot('administrator', server.empty) and currentUserIsNot('editor', server.empty) and currentUserIsNot('author', server.empty) and currentUserIsNot('contributor', server.empty))):
+	block(id=121, category='auth-bypass', description='Accelerated Mobile Pages <= 0.9.97.19 - Missing Authentication Checks', whitelist=0)
+
 if (matchCount('/(^|;|{|})O:+?\+*[0-9]+:"WP_Theme"/i', request.headers, request.cookies, request.body, request.queryString)):
 	block(id=103, category='obji', score=100, description='PHP Object Injection')
 
@@ -401,4 +399,7 @@ if (match('/^\/(?:\.\/)*(?:var|home|usr|mnt|media|etc|tmp|dev|proc)\//i', reques
 
 if (match('/<\!(?:DOCTYPE|ENTITY)\s+(?:%\s*)?\w+\s+SYSTEM/i', request.body, request.queryString)):
 	block(id=14, category='xxe', description='XXE: External Entity Expansion')
+
+if (match('/^(?:nopriv_)?wpgdprc_process_action$/i', request.body.action, request.queryString.action) and notMatch('/^\{[\'"]type[\'"]:[\'"]access_request[\'"],\s?[\'"]email[\'"]:[\'"][^\'"]+[\'"],\s?[\'"]consent[\'"]:(true|false)\}$/i', request.body.data) and currentUserIsNot('administrator', server.empty)):
+	block(id=120, category='privesc', description='WP GDPR Compliance <= 1.4.2 - Update Any Option / Call Any Action')
 

@@ -10,7 +10,7 @@
 		<div id="slogan-sec">
 			<div class="container">
 				<div id="slogan">
-					<h1>ONLINE AND RETAIL SOLUTIONS<br />FOR BOOKMAKER BUSINESS</h1>
+					<h1>ONLINE AND RETAIL SOLUTIONS<br /> FOR BOOKMAKER BUSINESS</h1>
 					<h3>CERTIFIED BY</h3>
 					<img src="http://localhost/ARsite/app/wp-content/uploads/2018/07/quinel.png" alt="quinel logo" />
 				</div>
@@ -54,7 +54,7 @@
 					armanage_front_page_posts(array(
 						'post_type' =>'blog' , 
 						'orderby'=>'date',
-						'order'=>'ASC',
+						'order'=>'DESC',
 						'meta_key'=>'',
 						'posts_per_page'=>'3',
 						'category_name'=>'',
@@ -74,12 +74,13 @@
 			<h2 class="title">Products</h2>
 			<h3>PREMIUM BETTING SOFTWARE FOR BOOKMAKERS</h3>
 			<div class="container">
+				<!--
 				<ul class="nav nav-tabs">
 					<li class="active"><h4><a data-toggle="tab" href="#1">White Label Betting Software</a></h4></li>
 					<li><h4><a data-toggle="tab" href="#2"> Live Betting Grid</a></h4></li>
 					<li><h4><a data-toggle="tab" href="#3">Mobile Betting</a></h4></li>
-				</ul>
-				<div class="tab-content">    
+				</ul> -->
+				<div class="panel-group" id="accordion"> 
 				<?php 
 						armanage_front_page_posts(array(
 							'post_type' =>'products' , 
@@ -92,8 +93,15 @@
 							'service_placement'=>'',
 							'blog_type'=>'',
 						), 'item');
-					?>
+					 ?>
 				</div>
+
+
+
+
+
+
+
 				<div class="sec-read-more container">
 					<a href="<?php echo esc_url(  get_page_link( 191 ) ); ?>">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 				</div>
@@ -168,7 +176,7 @@
 	<section id="facebook" class="row section">
 		<h2 class="title">Find us on facebook</h2>
 		<div class="container">
-			<?php	require_once __DIR__ . '/facebook.php';	?>
+			<?php //include_once __DIR__ . '/facebook.php';	?>
 		</div>
 	</section>
 	

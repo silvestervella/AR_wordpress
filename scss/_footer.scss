@@ -1,6 +1,9 @@
 footer.section {
     padding: 0;
     position: relative;
+    .container {
+        padding: 0;
+    }
     #footer-top {
         background: $primary-color;
         color: #fff;
@@ -36,7 +39,7 @@ footer.section {
     }
     #footer-menu {
         background: $primary-color-two;
-        padding: 30px 0;
+        padding: 10px 0;
         nav {
             display: block;
             float: left;
@@ -54,6 +57,7 @@ footer.section {
                     }
                     a {
                         color: #fff;
+                        font-size: 12px;
                         &:hover {
                             color: #fff;
                             text-decoration: none;
@@ -77,6 +81,9 @@ footer.section {
     }
     .form {
         form {
+            label {
+                width: 100%;
+            }
             color: #fff;
             input , textarea {
                 background: rgba(255,255,255,0.1);
@@ -85,6 +92,7 @@ footer.section {
                 margin-top: 5px;
                 font-size: 14px;
                 font-weight: 300;
+                width: 100%
             }
             input[type=submit] {
                 padding: 10px;

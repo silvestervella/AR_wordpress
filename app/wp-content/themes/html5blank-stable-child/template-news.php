@@ -23,9 +23,12 @@
                 <?php armanage_prod_serv_temp_post_gen(array(
                         'post_type' =>'blog' , 
                         'orderby'=>'date',
-                        'order'=>'ASC',
+                        'order'=>'DESC',
                         'meta_key'=>'',
                         'product_type'=>'',
+                        'blog_type'=>'',
+                        'posts_per_page'=>'',
+                        'nopaging'=>'true'
                     )); ?>
 
             </div>

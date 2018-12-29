@@ -26,10 +26,14 @@
                         'order'=>'ASC',
                         'meta_key'=>'_custom_post_order',
                         'product_type'=>'our-products',
+                        'blog_type'=>'',
+                        'posts_per_page'=>'',
+                        'nopaging'=>'true'
                     )); ?>
 
             </div>
             <!-- /posts-sec -->
+            <div class="tp-mob-link"><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Third Party Products' ) ) ); ?>">View Our Third Party Products<i class="fa fa-arrow-right"></i></a></div>
             <div id="prod-page-tp">
             <div id="tp-overlay">
             <div id="tp-view"><i class="fa fa-arrow-right"></i>View Our Third Party Products</div>
