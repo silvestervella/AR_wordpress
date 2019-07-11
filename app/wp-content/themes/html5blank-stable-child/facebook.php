@@ -3,12 +3,12 @@
 require __DIR__ . '/includes/facebook/src/Facebook/autoload.php';
 
 $fb = new Facebook\Facebook([
-    'app_id' => '333817067380493',
-    'app_secret' => '40aa30c097211288d0bdc7af91c67c38',
+    'app_id' => '',
+    'app_secret' => '',
     'default_graph_version' => 'v3.1'
     ]);
 
-    $access_token =  'EAAEvmte4nw0BAJu3sG372toXhpRKMJ5eioKEPWjpOT1eKk9kbiF8SOkSK8IEfsMLEF6QvZAZBdOtMchGkFQbsDipmchwD9wWX2i1TQHKb4cK2uHE2bCdXNt5Sn4SklnUZCnLpo0qAQ57i4DIxPpkxiK0QnnEcDY55lgGZAS1nh5yOWFnk6I64vVK6zlG6nLeYgNz4YZBBPQZDZD';
+    $access_token =  '';
 
 
     try {
